@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata minClientVersion="">
+    <id>Hyphenate.iOS.Lib</id>
+    <version>3.5.2</version>
+    <title>Hyphenate.iOS.Lib</title>
+    <authors>YinCheneg</authors>
+    <owners>YinCheng</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <licenseUrl>https://opensource.org/licenses/MIT</licenseUrl>
+    <projectUrl>https://github.com/yinchengvy/Hyphenate.iOS.Lib.git</projectUrl>
+    <description>Xamarin Binding for Hyphenate iOS Library</description>
+    <summary></summary>
+    <releaseNotes>Hyphenate iOS Library v3.5.2</releaseNotes>
+    <copyright></copyright>
+    <language></language>
+    <tags>Xamarin.iOS, Hyphenate</tags>
+    <dependencies>
+      <group targetFramework="Xamarin.iOS1.0" />
+    </dependencies>
+    <frameworkAssemblies>
+      <frameworkAssembly assemblyName="System" targetFramework="Xamarin.iOS1.0" />
+      <frameworkAssembly assemblyName="Xamarin.iOS" targetFramework="Xamarin.iOS1.0" />
+    </frameworkAssemblies>
+  </metadata>
+  <files>
+    <file src="Hyphenate.iOS.Lib/bin/Release/Hyphenate.iOS.dll" target="lib/xamarinios10" />
+  </files>
+</package>
