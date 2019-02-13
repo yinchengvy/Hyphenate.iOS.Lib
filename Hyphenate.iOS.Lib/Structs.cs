@@ -344,4 +344,31 @@ namespace Hyphenate.iOS.Lib
 		Normal = 0,
 		Large
 	}
+
+	public static class DefineConstants
+	{
+        // EMDefine.h
+        public static readonly string RegistedDeviceToken = "emRegistedDeviceToken";
+        public static readonly string BindDeviceToken = "emDeviceToken";
+        public static readonly string Uuid = "emUuid";
+        public static readonly string Username = "emUsername";
+        public static readonly string Password = "emPassword";
+        public static readonly string Token = "emToken";
+        public static readonly string AutoLogin = "emAutoLogin";
+
+        // EMGroupOptions.h
+        public static readonly int SDK_GROUP_MINUSERSCOUNT = 3;
+        public static readonly int SDK_GROUP_USERSCOUNTDEFAULT = 200;
+
+        // EMPushOptions.h
+        public static readonly string PushNickname = "nickname";
+        public static readonly string PushDisplayStyle = "notification_display_style";
+        public static readonly string PushNoDisturbing = "notification_no_disturbing";
+        public static readonly string PushNoDisturbingStartH = "notification_no_disturbing_start";
+        public static readonly string PushNoDisturbingStartM = "notification_no_disturbing_startM";
+        public static readonly string PushNoDisturbingEndH = "notification_no_disturbing_end";
+        public static readonly string PushNoDisturbingEndM = "notification_no_disturbing_endM";
+
+    }
+
 }

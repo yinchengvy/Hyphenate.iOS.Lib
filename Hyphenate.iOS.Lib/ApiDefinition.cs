@@ -75,7 +75,7 @@ namespace Hyphenate.iOS.Lib
 
 	// @interface EMOptions : NSObject
 	[BaseType (typeof(NSObject))]
-	interface EMOptions
+	partial interface EMOptions
 	{
 		// @property (readonly, copy, nonatomic) NSString * appkey;
 		[Export ("appkey")]
@@ -150,6 +150,36 @@ namespace Hyphenate.iOS.Lib
 		[Export ("usingHttps")]
 		bool UsingHttps { get; set; }
 	}
+
+    // @interface PrivateDeploy (EMOptions)
+    // [Category]
+    // [BaseType (typeof(EMOptions))]
+    partial interface EMOptions//_PrivateDeploy
+    {
+        // @property (assign, nonatomic) BOOL enableDnsConfig;
+        [Export ("enableDnsConfig")]
+        bool EnableDnsConfig { get; set; }
+
+        // @property (assign, nonatomic) int chatPort;
+        [Export ("chatPort")]
+        int ChatPort { get; set; }
+
+        // @property (copy, nonatomic) NSString * chatServer;
+        [Export ("chatServer")]
+        string ChatServer { get; set; }
+
+        // @property (copy, nonatomic) NSString * restServer;
+        [Export ("restServer")]
+        string RestServer { get; set; }
+
+        // @property (copy, nonatomic) NSString * dnsURL;
+        [Export ("dnsURL")]
+        string DnsURL { get; set; }
+
+        // @property (nonatomic, strong) NSDictionary * extension;
+        [Export ("extension", ArgumentSemantic.Strong)]
+        NSDictionary Extension { get; set; }
+    }
 
 	// @interface EMPushOptions : NSObject
 	[BaseType (typeof(NSObject))]
