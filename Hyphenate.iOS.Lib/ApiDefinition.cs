@@ -664,8 +664,16 @@ namespace Hyphenate.iOS.Lib
 		[Export ("initWithData:thumbnailData:")]
 		IntPtr Constructor (NSData aData, NSData aThumbnailData);
 
-		// @property (nonatomic) CGFloat compressRatio __attribute__((deprecated("Use - compressionRatio")));
-		[Export ("compressRatio")]
+        // -(instancetype)initWithLocalPath:(NSString *)aLocalPath displayName:(NSString *)aDisplayName;
+        [Export("initWithLocalPath:displayName:")]
+        IntPtr Constructor(string aLocalPath, string aDisplayName);
+
+        // -(instancetype)initWithData:(NSData *)aData displayName:(NSString *)aDisplayName;
+        [Export("initWithData:displayName:")]
+        IntPtr Constructor(NSData aData, string aDisplayName);
+
+        // @property (nonatomic) CGFloat compressRatio __attribute__((deprecated("Use - compressionRatio")));
+        [Export ("compressRatio")]
 		nfloat CompressRatio { get; set; }
 	}
 
@@ -676,7 +684,15 @@ namespace Hyphenate.iOS.Lib
 		// @property (nonatomic) int duration;
 		[Export ("duration")]
 		int Duration { get; set; }
-	}
+
+        // -(instancetype)initWithLocalPath:(NSString *)aLocalPath displayName:(NSString *)aDisplayName;
+        [Export("initWithLocalPath:displayName:")]
+        IntPtr Constructor(string aLocalPath, string aDisplayName);
+
+        // -(instancetype)initWithData:(NSData *)aData displayName:(NSString *)aDisplayName;
+        [Export("initWithData:displayName:")]
+        IntPtr Constructor(NSData aData, string aDisplayName);
+    }
 
 	// @interface EMVideoMessageBody : EMFileMessageBody
 	[BaseType (typeof(EMFileMessageBody))]
@@ -705,7 +721,15 @@ namespace Hyphenate.iOS.Lib
 		// @property (nonatomic) EMDownloadStatus thumbnailDownloadStatus;
 		[Export ("thumbnailDownloadStatus", ArgumentSemantic.Assign)]
 		EMDownloadStatus ThumbnailDownloadStatus { get; set; }
-	}
+
+        // -(instancetype)initWithLocalPath:(NSString *)aLocalPath displayName:(NSString *)aDisplayName;
+        [Export("initWithLocalPath:displayName:")]
+        IntPtr Constructor(string aLocalPath, string aDisplayName);
+
+        // -(instancetype)initWithData:(NSData *)aData displayName:(NSString *)aDisplayName;
+        [Export("initWithData:displayName:")]
+        IntPtr Constructor(NSData aData, string aDisplayName);
+    }
 
 	// @interface EMCursorResult : NSObject
 	[BaseType (typeof(NSObject))]
