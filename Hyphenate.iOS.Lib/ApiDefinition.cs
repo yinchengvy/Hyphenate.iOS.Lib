@@ -78,7 +78,7 @@ namespace Hyphenate.iOS.Lib
 	partial interface EMOptions
 	{
 		// @property (readonly, copy, nonatomic) NSString * appkey;
-		[Export ("appkey")]
+		[NullAllowed, Export ("appkey")]
 		string Appkey { get; }
 
 		// @property (assign, nonatomic) BOOL enableConsoleLog;
@@ -134,7 +134,7 @@ namespace Hyphenate.iOS.Lib
 		bool IsAutoTransferMessageAttachments { get; set; }
 
 		// @property (copy, nonatomic) NSString * apnsCertName;
-		[Export ("apnsCertName")]
+		[NullAllowed, Export ("apnsCertName")]
 		string ApnsCertName { get; set; }
 
 		// +(instancetype)optionsWithAppkey:(NSString *)aAppkey;
@@ -165,19 +165,19 @@ namespace Hyphenate.iOS.Lib
         int ChatPort { get; set; }
 
         // @property (copy, nonatomic) NSString * chatServer;
-        [Export ("chatServer")]
+        [NullAllowed, Export ("chatServer")]
         string ChatServer { get; set; }
 
         // @property (copy, nonatomic) NSString * restServer;
-        [Export ("restServer")]
+        [NullAllowed, Export ("restServer")]
         string RestServer { get; set; }
 
         // @property (copy, nonatomic) NSString * dnsURL;
-        [Export ("dnsURL")]
+        [NullAllowed, Export ("dnsURL")]
         string DnsURL { get; set; }
 
         // @property (nonatomic, strong) NSDictionary * extension;
-        [Export ("extension", ArgumentSemantic.Strong)]
+        [NullAllowed, Export ("extension", ArgumentSemantic.Strong)]
         NSDictionary Extension { get; set; }
     }
 
@@ -186,7 +186,7 @@ namespace Hyphenate.iOS.Lib
 	interface EMPushOptions
 	{
 		// @property (copy, nonatomic) NSString * displayName;
-		[Export ("displayName")]
+		[NullAllowed, Export ("displayName")]
 		string DisplayName { get; set; }
 
 		// @property (nonatomic) EMPushDisplayStyle displayStyle;
@@ -206,7 +206,7 @@ namespace Hyphenate.iOS.Lib
 		nint NoDisturbingEndH { get; set; }
 
 		// @property (copy, nonatomic) NSString * nickname __attribute__((deprecated("Use - displayName")));
-		[Export ("nickname")]
+		[NullAllowed, Export ("nickname")]
 		string Nickname { get; set; }
 	}
 
@@ -219,7 +219,7 @@ namespace Hyphenate.iOS.Lib
 		EMErrorCode Code { get; set; }
 
 		// @property (copy, nonatomic) NSString * errorDescription;
-		[Export ("errorDescription")]
+		[NullAllowed, Export ("errorDescription")]
 		string ErrorDescription { get; set; }
 
 		// -(instancetype)initWithDescription:(NSString *)aDescription code:(EMErrorCode)aCode;
@@ -325,7 +325,7 @@ namespace Hyphenate.iOS.Lib
 	interface EMConversation
 	{
 		// @property (readonly, copy, nonatomic) NSString * conversationId;
-		[Export ("conversationId")]
+		[NullAllowed, Export ("conversationId")]
 		string ConversationId { get; }
 
 		// @property (readonly, assign, nonatomic) EMConversationType type;
@@ -337,15 +337,15 @@ namespace Hyphenate.iOS.Lib
 		int UnreadMessagesCount { get; }
 
 		// @property (copy, nonatomic) NSDictionary * ext;
-		[Export ("ext", ArgumentSemantic.Copy)]
+		[NullAllowed, Export ("ext", ArgumentSemantic.Copy)]
 		NSDictionary Ext { get; set; }
 
 		// @property (readonly, nonatomic, strong) EMMessage * latestMessage;
-		[Export ("latestMessage", ArgumentSemantic.Strong)]
+		[NullAllowed, Export ("latestMessage", ArgumentSemantic.Strong)]
 		EMMessage LatestMessage { get; }
 
 		// -(EMMessage *)lastReceivedMessage;
-		[Export ("lastReceivedMessage")]
+		[NullAllowed, Export ("lastReceivedMessage")]
 		//[Verify (MethodToProperty)]
 		EMMessage LastReceivedMessage { get; }
 
@@ -378,7 +378,7 @@ namespace Hyphenate.iOS.Lib
 		void SetMarkAllMessagesAsRead (out EMError pError);
 
 		// -(EMMessage *)loadMessageWithId:(NSString *)aMessageId error:(EMError **)pError;
-		[Export ("loadMessageWithId:error:")]
+		[NullAllowed, Export ("loadMessageWithId:error:")]
 		EMMessage LoadMessageWithId (string aMessageId, out EMError pError);
 
 		// -(void)loadMessagesStartFromId:(NSString *)aMessageId count:(int)aCount searchDirection:(EMMessageSearchDirection)aDirection completion:(void (^)(NSArray *, EMError *))aCompletionBlock;
@@ -433,31 +433,31 @@ namespace Hyphenate.iOS.Lib
 		bool UpdateConversationExtToDB { get; }
 
 		// -(EMMessage *)loadMessageWithId:(NSString *)aMessageId __attribute__((deprecated("Use -loadMessageWithId:error:")));
-		[Export ("loadMessageWithId:")]
+		[NullAllowed, Export ("loadMessageWithId:")]
 		EMMessage LoadMessageWithId (string aMessageId);
 
 		// -(NSArray *)loadMoreMessagesFromId:(NSString *)aMessageId limit:(int)aLimit direction:(EMMessageSearchDirection)aDirection __attribute__((deprecated("Use -loadMessagesStartFromId:count:searchDirection:completion:")));
-		[Export ("loadMoreMessagesFromId:limit:direction:")]
+		[NullAllowed, Export ("loadMoreMessagesFromId:limit:direction:")]
 		//[Verify (StronglyTypedNSArray)]
 		NSObject[] LoadMoreMessagesFromId (string aMessageId, int aLimit, EMMessageSearchDirection aDirection);
 
 		// -(NSArray *)loadMoreMessagesWithType:(EMMessageBodyType)aType before:(long long)aTimestamp limit:(int)aLimit from:(NSString *)aSender direction:(EMMessageSearchDirection)aDirection __attribute__((deprecated("Use -loadMessagesWithType:timestamp:count:fromUser:searchDirection:completion:")));
-		[Export ("loadMoreMessagesWithType:before:limit:from:direction:")]
+		[NullAllowed, Export ("loadMoreMessagesWithType:before:limit:from:direction:")]
 		//[Verify (StronglyTypedNSArray)]
 		NSObject[] LoadMoreMessagesWithType (EMMessageBodyType aType, long aTimestamp, int aLimit, string aSender, EMMessageSearchDirection aDirection);
 
 		// -(NSArray *)loadMoreMessagesContain:(NSString *)aKeywords before:(long long)aTimestamp limit:(int)aLimit from:(NSString *)aSender direction:(EMMessageSearchDirection)aDirection __attribute__((deprecated("Use -loadMessagesContainKeywords:timestamp:count:fromUser:searchDirection:completion:")));
-		[Export ("loadMoreMessagesContain:before:limit:from:direction:")]
+		[NullAllowed, Export ("loadMoreMessagesContain:before:limit:from:direction:")]
 		//[Verify (StronglyTypedNSArray)]
 		NSObject[] LoadMoreMessagesContain (string aKeywords, long aTimestamp, int aLimit, string aSender, EMMessageSearchDirection aDirection);
 
 		// -(NSArray *)loadMoreMessagesFrom:(long long)aStartTimestamp to:(long long)aEndTimestamp maxCount:(int)aMaxCount __attribute__((deprecated("Use -loadMessagesFrom:to:count:completion:")));
-		[Export ("loadMoreMessagesFrom:to:maxCount:")]
+		[NullAllowed, Export ("loadMoreMessagesFrom:to:maxCount:")]
 		//[Verify (StronglyTypedNSArray)]
 		NSObject[] LoadMoreMessagesFrom (long aStartTimestamp, long aEndTimestamp, int aMaxCount);
 
 		// -(EMMessage *)latestMessageFromOthers __attribute__((deprecated("Use -lastReceivedMessage")));
-		[Export ("latestMessageFromOthers")]
+		[NullAllowed, Export ("latestMessageFromOthers")]
 		//[Verify (MethodToProperty)]
 		EMMessage LatestMessageFromOthers { get; }
 	}
@@ -467,11 +467,11 @@ namespace Hyphenate.iOS.Lib
 	interface EMMessage
 	{
 		// @property (copy, nonatomic) NSString * messageId;
-		[Export ("messageId")]
+		[NullAllowed, Export ("messageId")]
 		string MessageId { get; set; }
 
 		// @property (copy, nonatomic) NSString * conversationId;
-		[Export ("conversationId")]
+		[NullAllowed, Export ("conversationId")]
 		string ConversationId { get; set; }
 
 		// @property (nonatomic) EMMessageDirection direction;
@@ -479,11 +479,11 @@ namespace Hyphenate.iOS.Lib
 		EMMessageDirection Direction { get; set; }
 
 		// @property (copy, nonatomic) NSString * from;
-		[Export ("from")]
+		[NullAllowed, Export ("from")]
 		string From { get; set; }
 
 		// @property (copy, nonatomic) NSString * to;
-		[Export ("to")]
+		[NullAllowed, Export ("to")]
 		string To { get; set; }
 
 		// @property (nonatomic) long long timestamp;
@@ -515,16 +515,16 @@ namespace Hyphenate.iOS.Lib
 		bool IsRead { get; set; }
 
 		// @property (nonatomic, strong) EMMessageBody * body;
-		[Export ("body", ArgumentSemantic.Strong)]
+		[NullAllowed, Export ("body", ArgumentSemantic.Strong)]
 		EMMessageBody Body { get; set; }
 
 		// @property (copy, nonatomic) NSDictionary * ext;
-		[Export ("ext", ArgumentSemantic.Copy)]
+		[NullAllowed, Export ("ext", ArgumentSemantic.Copy)]
 		NSDictionary Ext { get; set; }
 
 		// -(id)initWithConversationID:(NSString *)aConversationId from:(NSString *)aFrom to:(NSString *)aTo body:(EMMessageBody *)aBody ext:(NSDictionary *)aExt;
 		[Export ("initWithConversationID:from:to:body:ext:")]
-		IntPtr Constructor (string aConversationId, string aFrom, string aTo, EMMessageBody aBody, NSDictionary aExt);
+		IntPtr Constructor (string aConversationId, string aFrom, string aTo, EMMessageBody aBody, [NullAllowed] NSDictionary aExt);
 	}
 
 	// @interface EMTextMessageBody : EMMessageBody
@@ -532,7 +532,7 @@ namespace Hyphenate.iOS.Lib
 	interface EMTextMessageBody
 	{
 		// @property (readonly, copy, nonatomic) NSString * text;
-		[Export ("text")]
+		[NullAllowed, Export ("text")]
 		string Text { get; }
 
 		// -(instancetype)initWithText:(NSString *)aText;
@@ -553,7 +553,7 @@ namespace Hyphenate.iOS.Lib
 		double Longitude { get; set; }
 
 		// @property (copy, nonatomic) NSString * address;
-		[Export ("address")]
+		[NullAllowed, Export ("address")]
 		string Address { get; set; }
 
 		// -(instancetype)initWithLatitude:(double)aLatitude longitude:(double)aLongitude address:(NSString *)aAddress;
@@ -566,11 +566,11 @@ namespace Hyphenate.iOS.Lib
 	interface EMCmdMessageBody
 	{
 		// @property (copy, nonatomic) NSString * action;
-		[Export ("action")]
+		[NullAllowed, Export ("action")]
 		string Action { get; set; }
 
 		// @property (copy, nonatomic) NSArray * params;
-		[Export ("params", ArgumentSemantic.Copy)]
+		[NullAllowed, Export ("params", ArgumentSemantic.Copy)]
 		//[Verify (StronglyTypedNSArray)]
 		NSObject[] Params { get; set; }
 
@@ -633,19 +633,19 @@ namespace Hyphenate.iOS.Lib
 		nfloat CompressionRatio { get; set; }
 
 		// @property (copy, nonatomic) NSString * thumbnailDisplayName;
-		[Export ("thumbnailDisplayName")]
+		[NullAllowed, Export ("thumbnailDisplayName")]
 		string ThumbnailDisplayName { get; set; }
 
 		// @property (copy, nonatomic) NSString * thumbnailLocalPath;
-		[Export ("thumbnailLocalPath")]
+		[NullAllowed, Export ("thumbnailLocalPath")]
 		string ThumbnailLocalPath { get; set; }
 
 		// @property (copy, nonatomic) NSString * thumbnailRemotePath;
-		[Export ("thumbnailRemotePath")]
+		[NullAllowed, Export ("thumbnailRemotePath")]
 		string ThumbnailRemotePath { get; set; }
 
 		// @property (copy, nonatomic) NSString * thumbnailSecretKey;
-		[Export ("thumbnailSecretKey")]
+		[NullAllowed, Export ("thumbnailSecretKey")]
 		string ThumbnailSecretKey { get; set; }
 
 		// @property (nonatomic) CGSize thumbnailSize;
@@ -703,15 +703,15 @@ namespace Hyphenate.iOS.Lib
 		int Duration { get; set; }
 
 		// @property (copy, nonatomic) NSString * thumbnailLocalPath;
-		[Export ("thumbnailLocalPath")]
+		[NullAllowed, Export ("thumbnailLocalPath")]
 		string ThumbnailLocalPath { get; set; }
 
 		// @property (copy, nonatomic) NSString * thumbnailRemotePath;
-		[Export ("thumbnailRemotePath")]
+		[NullAllowed, Export ("thumbnailRemotePath")]
 		string ThumbnailRemotePath { get; set; }
 
 		// @property (copy, nonatomic) NSString * thumbnailSecretKey;
-		[Export ("thumbnailSecretKey")]
+		[NullAllowed, Export ("thumbnailSecretKey")]
 		string ThumbnailSecretKey { get; set; }
 
 		// @property (nonatomic) CGSize thumbnailSize;
@@ -736,12 +736,12 @@ namespace Hyphenate.iOS.Lib
 	interface EMCursorResult
 	{
 		// @property (nonatomic, strong) NSArray * list;
-		[Export ("list", ArgumentSemantic.Strong)]
+		[NullAllowed, Export ("list", ArgumentSemantic.Strong)]
 		//[Verify (StronglyTypedNSArray)]
 		NSObject[] List { get; set; }
 
 		// @property (copy, nonatomic) NSString * cursor;
-		[Export ("cursor")]
+		[NullAllowed, Export ("cursor")]
 		string Cursor { get; set; }
 
 		// +(instancetype)cursorResultWithList:(NSArray *)aList andCursor:(NSString *)aCusror;
@@ -770,87 +770,87 @@ namespace Hyphenate.iOS.Lib
 
 		// @required -(NSArray *)getAllConversations;
 		[Abstract]
-		[Export ("getAllConversations")]
+		[NullAllowed, Export ("getAllConversations")]
 		//[Verify (MethodToProperty), Verify (StronglyTypedNSArray)]
 		NSObject[] AllConversations { get; }
 
 		// @required -(EMConversation *)getConversation:(NSString *)aConversationId type:(EMConversationType)aType createIfNotExist:(BOOL)aIfCreate;
 		[Abstract]
-		[Export ("getConversation:type:createIfNotExist:")]
+		[NullAllowed, Export ("getConversation:type:createIfNotExist:")]
 		EMConversation GetConversation (string aConversationId, EMConversationType aType, bool aIfCreate);
 
 		// @required -(void)deleteConversation:(NSString *)aConversationId isDeleteMessages:(BOOL)aIsDeleteMessages completion:(void (^)(NSString *, EMError *))aCompletionBlock;
 		[Abstract]
 		[Export ("deleteConversation:isDeleteMessages:completion:")]
-		void DeleteConversation (string aConversationId, bool aIsDeleteMessages, Action<NSString, EMError> aCompletionBlock);
+		void DeleteConversation (string aConversationId, bool aIsDeleteMessages, [NullAllowed] Action<NSString, EMError> aCompletionBlock);
 
 		// @required -(void)deleteConversations:(NSArray *)aConversations isDeleteMessages:(BOOL)aIsDeleteMessages completion:(void (^)(EMError *))aCompletionBlock;
 		[Abstract]
 		[Export ("deleteConversations:isDeleteMessages:completion:")]
 		//[Verify (StronglyTypedNSArray)]
-		void DeleteConversations (NSObject[] aConversations, bool aIsDeleteMessages, Action<EMError> aCompletionBlock);
+		void DeleteConversations (NSObject[] aConversations, bool aIsDeleteMessages, [NullAllowed] Action<EMError> aCompletionBlock);
 
 		// @required -(void)importConversations:(NSArray *)aConversations completion:(void (^)(EMError *))aCompletionBlock;
 		[Abstract]
 		[Export ("importConversations:completion:")]
 		//[Verify (StronglyTypedNSArray)]
-		void ImportConversations (NSObject[] aConversations, Action<EMError> aCompletionBlock);
+		void ImportConversations (NSObject[] aConversations, [NullAllowed] Action<EMError> aCompletionBlock);
 
 		// @required -(NSString *)getMessageAttachmentPath:(NSString *)aConversationId;
 		[Abstract]
-		[Export ("getMessageAttachmentPath:")]
+		[NullAllowed, Export ("getMessageAttachmentPath:")]
 		string GetMessageAttachmentPath (string aConversationId);
 
 		// @required -(void)importMessages:(NSArray *)aMessages completion:(void (^)(EMError *))aCompletionBlock;
 		[Abstract]
 		[Export ("importMessages:completion:")]
 		//[Verify (StronglyTypedNSArray)]
-		void ImportMessages (NSObject[] aMessages, Action<EMError> aCompletionBlock);
+		void ImportMessages (NSObject[] aMessages, [NullAllowed] Action<EMError> aCompletionBlock);
 
 		// @required -(void)updateMessage:(EMMessage *)aMessage completion:(void (^)(EMMessage *, EMError *))aCompletionBlock;
 		[Abstract]
 		[Export ("updateMessage:completion:")]
-		void UpdateMessage (EMMessage aMessage, Action<EMMessage, EMError> aCompletionBlock);
+		void UpdateMessage (EMMessage aMessage, [NullAllowed] Action<EMMessage, EMError> aCompletionBlock);
 
 		// @required -(void)sendMessageReadAck:(EMMessage *)aMessage completion:(void (^)(EMMessage *, EMError *))aCompletionBlock;
 		[Abstract]
 		[Export ("sendMessageReadAck:completion:")]
-		void SendMessageReadAck (EMMessage aMessage, Action<EMMessage, EMError> aCompletionBlock);
+		void SendMessageReadAck (EMMessage aMessage, [NullAllowed] Action<EMMessage, EMError> aCompletionBlock);
 
 		// @required -(void)recallMessage:(EMMessage *)aMessage completion:(void (^)(EMMessage *, EMError *))aCompletionBlock;
 		[Abstract]
 		[Export ("recallMessage:completion:")]
-		void RecallMessage (EMMessage aMessage, Action<EMMessage, EMError> aCompletionBlock);
+		void RecallMessage (EMMessage aMessage, [NullAllowed] Action<EMMessage, EMError> aCompletionBlock);
 
 		// @required -(void)sendMessage:(EMMessage *)aMessage progress:(void (^)(int))aProgressBlock completion:(void (^)(EMMessage *, EMError *))aCompletionBlock;
 		[Abstract]
 		[Export ("sendMessage:progress:completion:")]
-		void SendMessage (EMMessage aMessage, Action<int> aProgressBlock, Action<EMMessage, EMError> aCompletionBlock);
+		void SendMessage (EMMessage aMessage, [NullAllowed] Action<int> aProgressBlock, [NullAllowed] Action<EMMessage, EMError> aCompletionBlock);
 
 		// @required -(void)resendMessage:(EMMessage *)aMessage progress:(void (^)(int))aProgressBlock completion:(void (^)(EMMessage *, EMError *))aCompletionBlock;
 		[Abstract]
 		[Export ("resendMessage:progress:completion:")]
-		void ResendMessage (EMMessage aMessage, Action<int> aProgressBlock, Action<EMMessage, EMError> aCompletionBlock);
+		void ResendMessage (EMMessage aMessage, [NullAllowed] Action<int> aProgressBlock, [NullAllowed] Action<EMMessage, EMError> aCompletionBlock);
 
 		// @required -(void)downloadMessageThumbnail:(EMMessage *)aMessage progress:(void (^)(int))aProgressBlock completion:(void (^)(EMMessage *, EMError *))aCompletionBlock;
 		[Abstract]
 		[Export ("downloadMessageThumbnail:progress:completion:")]
-		void DownloadMessageThumbnail (EMMessage aMessage, Action<int> aProgressBlock, Action<EMMessage, EMError> aCompletionBlock);
+		void DownloadMessageThumbnail (EMMessage aMessage, [NullAllowed] Action<int> aProgressBlock, [NullAllowed] Action<EMMessage, EMError> aCompletionBlock);
 
 		// @required -(void)downloadMessageAttachment:(EMMessage *)aMessage progress:(void (^)(int))aProgressBlock completion:(void (^)(EMMessage *, EMError *))aCompletionBlock;
 		[Abstract]
 		[Export ("downloadMessageAttachment:progress:completion:")]
-		void DownloadMessageAttachment (EMMessage aMessage, Action<int> aProgressBlock, Action<EMMessage, EMError> aCompletionBlock);
+		void DownloadMessageAttachment (EMMessage aMessage, [NullAllowed] Action<int> aProgressBlock, [NullAllowed] Action<EMMessage, EMError> aCompletionBlock);
 
 		// @required -(EMCursorResult *)fetchHistoryMessagesFromServer:(NSString *)aConversationId conversationType:(EMConversationType)aConversationType startMessageId:(NSString *)aStartMessageId pageSize:(int)aPageSize error:(EMError **)pError;
 		[Abstract]
-		[Export ("fetchHistoryMessagesFromServer:conversationType:startMessageId:pageSize:error:")]
+		[NullAllowed, Export ("fetchHistoryMessagesFromServer:conversationType:startMessageId:pageSize:error:")]
 		EMCursorResult FetchHistoryMessagesFromServer (string aConversationId, EMConversationType aConversationType, string aStartMessageId, int aPageSize, out EMError pError);
 
 		// @required -(void)asyncFetchHistoryMessagesFromServer:(NSString *)aConversationId conversationType:(EMConversationType)aConversationType startMessageId:(NSString *)aStartMessageId pageSize:(int)aPageSize completion:(void (^)(EMCursorResult *, EMError *))aCompletionBlock;
 		[Abstract]
 		[Export ("asyncFetchHistoryMessagesFromServer:conversationType:startMessageId:pageSize:completion:")]
-		void AsyncFetchHistoryMessagesFromServer (string aConversationId, EMConversationType aConversationType, string aStartMessageId, int aPageSize, Action<EMCursorResult, EMError> aCompletionBlock);
+		void AsyncFetchHistoryMessagesFromServer (string aConversationId, EMConversationType aConversationType, string aStartMessageId, int aPageSize, [NullAllowed] Action<EMCursorResult, EMError> aCompletionBlock);
 
 		// @required -(void)addDelegate:(id<EMChatManagerDelegate>)aDelegate __attribute__((deprecated("")));
 		[Abstract]
@@ -859,7 +859,7 @@ namespace Hyphenate.iOS.Lib
 
 		// @required -(NSArray *)loadAllConversationsFromDB __attribute__((deprecated("Use -getAllConversations")));
 		[Abstract]
-		[Export ("loadAllConversationsFromDB")]
+		[NullAllowed, Export ("loadAllConversationsFromDB")]
 		//[Verify (MethodToProperty), Verify (StronglyTypedNSArray)]
 		NSObject[] LoadAllConversationsFromDB { get; }
 
@@ -899,22 +899,22 @@ namespace Hyphenate.iOS.Lib
 		// @required -(void)asyncSendMessage:(EMMessage *)aMessage progress:(void (^)(int))aProgressCompletion completion:(void (^)(EMMessage *, EMError *))aCompletion __attribute__((deprecated("Use -sendMessage:progress:completion:")));
 		[Abstract]
 		[Export ("asyncSendMessage:progress:completion:")]
-		void AsyncSendMessage (EMMessage aMessage, Action<int> aProgressCompletion, Action<EMMessage, EMError> aCompletion);
+		void AsyncSendMessage (EMMessage aMessage, [NullAllowed] Action<int> aProgressCompletion, [NullAllowed] Action<EMMessage, EMError> aCompletion);
 
 		// @required -(void)asyncResendMessage:(EMMessage *)aMessage progress:(void (^)(int))aProgressCompletion completion:(void (^)(EMMessage *, EMError *))aCompletion __attribute__((deprecated("Use -resendMessage:progress:completion:")));
 		[Abstract]
 		[Export ("asyncResendMessage:progress:completion:")]
-		void AsyncResendMessage (EMMessage aMessage, Action<int> aProgressCompletion, Action<EMMessage, EMError> aCompletion);
+		void AsyncResendMessage (EMMessage aMessage, [NullAllowed] Action<int> aProgressCompletion, [NullAllowed] Action<EMMessage, EMError> aCompletion);
 
 		// @required -(void)asyncDownloadMessageThumbnail:(EMMessage *)aMessage progress:(void (^)(int))aProgressCompletion completion:(void (^)(EMMessage *, EMError *))aCompletion __attribute__((deprecated("Use -downloadMessageThumbnail:progress:completion:")));
 		[Abstract]
 		[Export ("asyncDownloadMessageThumbnail:progress:completion:")]
-		void AsyncDownloadMessageThumbnail (EMMessage aMessage, Action<int> aProgressCompletion, Action<EMMessage, EMError> aCompletion);
+		void AsyncDownloadMessageThumbnail (EMMessage aMessage, [NullAllowed] Action<int> aProgressCompletion, [NullAllowed] Action<EMMessage, EMError> aCompletion);
 
 		// @required -(void)asyncDownloadMessageAttachments:(EMMessage *)aMessage progress:(void (^)(int))aProgressCompletion completion:(void (^)(EMMessage *, EMError *))aCompletion __attribute__((deprecated("Use -downloadMessageAttachment:progress:completion")));
 		[Abstract]
 		[Export ("asyncDownloadMessageAttachments:progress:completion:")]
-		void AsyncDownloadMessageAttachments (EMMessage aMessage, Action<int> aProgressCompletion, Action<EMMessage, EMError> aCompletion);
+		void AsyncDownloadMessageAttachments (EMMessage aMessage, [NullAllowed] Action<int> aProgressCompletion, [NullAllowed] Action<EMMessage, EMError> aCompletion);
 	}
 
     partial interface IEMContactManagerDelegate {}
@@ -984,96 +984,96 @@ namespace Hyphenate.iOS.Lib
 
 		// @required -(NSArray *)getContacts;
 		[Abstract]
-		[Export ("getContacts")]
+		[NullAllowed, Export ("getContacts")]
 		//[Verify (MethodToProperty), Verify (StronglyTypedNSArray)]
 		NSObject[] Contacts { get; }
 
 		// @required -(void)getContactsFromServerWithCompletion:(void (^)(NSArray *, EMError *))aCompletionBlock;
 		[Abstract]
 		[Export ("getContactsFromServerWithCompletion:")]
-		void GetContactsFromServerWithCompletion (Action<NSArray, EMError> aCompletionBlock);
+		void GetContactsFromServerWithCompletion ([NullAllowed] Action<NSArray, EMError> aCompletionBlock);
 
 		// @required -(NSArray *)getContactsFromServerWithError:(EMError **)pError;
 		[Abstract]
-		[Export ("getContactsFromServerWithError:")]
+		[NullAllowed, Export ("getContactsFromServerWithError:")]
 		//[Verify (StronglyTypedNSArray)]
 		NSObject[] GetContactsFromServerWithError (out EMError pError);
 
 		// @required -(EMError *)addContact:(NSString *)aUsername message:(NSString *)aMessage;
 		[Abstract]
-		[Export ("addContact:message:")]
+		[NullAllowed, Export ("addContact:message:")]
 		EMError AddContact (string aUsername, string aMessage);
 
 		// @required -(void)addContact:(NSString *)aUsername message:(NSString *)aMessage completion:(void (^)(NSString *, EMError *))aCompletionBlock;
 		[Abstract]
 		[Export ("addContact:message:completion:")]
-		void AddContact (string aUsername, string aMessage, Action<NSString, EMError> aCompletionBlock);
+		void AddContact (string aUsername, string aMessage, [NullAllowed] Action<NSString, EMError> aCompletionBlock);
 
 		// @required -(EMError *)deleteContact:(NSString *)aUsername isDeleteConversation:(BOOL)aIsDeleteConversation;
 		[Abstract]
-		[Export ("deleteContact:isDeleteConversation:")]
+		[NullAllowed, Export ("deleteContact:isDeleteConversation:")]
 		EMError DeleteContact (string aUsername, bool aIsDeleteConversation);
 
 		// @required -(void)deleteContact:(NSString *)aUsername isDeleteConversation:(BOOL)aIsDeleteConversation completion:(void (^)(NSString *, EMError *))aCompletionBlock;
 		[Abstract]
 		[Export ("deleteContact:isDeleteConversation:completion:")]
-		void DeleteContact (string aUsername, bool aIsDeleteConversation, Action<NSString, EMError> aCompletionBlock);
+		void DeleteContact (string aUsername, bool aIsDeleteConversation, [NullAllowed] Action<NSString, EMError> aCompletionBlock);
 
 		// @required -(void)approveFriendRequestFromUser:(NSString *)aUsername completion:(void (^)(NSString *, EMError *))aCompletionBlock;
 		[Abstract]
 		[Export ("approveFriendRequestFromUser:completion:")]
-		void ApproveFriendRequestFromUser (string aUsername, Action<NSString, EMError> aCompletionBlock);
+		void ApproveFriendRequestFromUser (string aUsername, [NullAllowed] Action<NSString, EMError> aCompletionBlock);
 
 		// @required -(void)declineFriendRequestFromUser:(NSString *)aUsername completion:(void (^)(NSString *, EMError *))aCompletionBlock;
 		[Abstract]
 		[Export ("declineFriendRequestFromUser:completion:")]
-		void DeclineFriendRequestFromUser (string aUsername, Action<NSString, EMError> aCompletionBlock);
+		void DeclineFriendRequestFromUser (string aUsername, [NullAllowed] Action<NSString, EMError> aCompletionBlock);
 
 		// @required -(NSArray *)getBlackList;
 		[Abstract]
-		[Export ("getBlackList")]
+		[NullAllowed, Export ("getBlackList")]
 		//[Verify (MethodToProperty), Verify (StronglyTypedNSArray)]
 		NSObject[] BlackList { get; }
 
 		// @required -(void)getBlackListFromServerWithCompletion:(void (^)(NSArray *, EMError *))aCompletionBlock;
 		[Abstract]
 		[Export ("getBlackListFromServerWithCompletion:")]
-		void GetBlackListFromServerWithCompletion (Action<NSArray, EMError> aCompletionBlock);
+		void GetBlackListFromServerWithCompletion ([NullAllowed]Action<NSArray, EMError> aCompletionBlock);
 
 		// @required -(NSArray *)getBlackListFromServerWithError:(EMError **)pError;
 		[Abstract]
-		[Export ("getBlackListFromServerWithError:")]
+		[NullAllowed, Export ("getBlackListFromServerWithError:")]
 		//[Verify (StronglyTypedNSArray)]
 		NSObject[] GetBlackListFromServerWithError (out EMError pError);
 
 		// @required -(EMError *)addUserToBlackList:(NSString *)aUsername relationshipBoth:(BOOL)aBoth;
 		[Abstract]
-		[Export ("addUserToBlackList:relationshipBoth:")]
+		[NullAllowed, Export ("addUserToBlackList:relationshipBoth:")]
 		EMError AddUserToBlackList (string aUsername, bool aBoth);
 
 		// @required -(void)addUserToBlackList:(NSString *)aUsername completion:(void (^)(NSString *, EMError *))aCompletionBlock;
 		[Abstract]
 		[Export ("addUserToBlackList:completion:")]
-		void AddUserToBlackList (string aUsername, Action<NSString, EMError> aCompletionBlock);
+		void AddUserToBlackList (string aUsername, [NullAllowed] Action<NSString, EMError> aCompletionBlock);
 
 		// @required -(EMError *)removeUserFromBlackList:(NSString *)aUsername;
 		[Abstract]
-		[Export ("removeUserFromBlackList:")]
+		[NullAllowed, Export ("removeUserFromBlackList:")]
 		EMError RemoveUserFromBlackList (string aUsername);
 
 		// @required -(void)removeUserFromBlackList:(NSString *)aUsername completion:(void (^)(NSString *, EMError *))aCompletionBlock;
 		[Abstract]
 		[Export ("removeUserFromBlackList:completion:")]
-		void RemoveUserFromBlackList (string aUsername, Action<NSString, EMError> aCompletionBlock);
+		void RemoveUserFromBlackList (string aUsername, [NullAllowed] Action<NSString, EMError> aCompletionBlock);
 
 		// @required -(EMError *)acceptInvitationForUsername:(NSString *)aUsername;
 		[Abstract]
-		[Export ("acceptInvitationForUsername:")]
+		[NullAllowed, Export ("acceptInvitationForUsername:")]
 		EMError AcceptInvitationForUsername (string aUsername);
 
 		// @required -(EMError *)declineInvitationForUsername:(NSString *)aUsername;
 		[Abstract]
-		[Export ("declineInvitationForUsername:")]
+		[NullAllowed, Export ("declineInvitationForUsername:")]
 		EMError DeclineInvitationForUsername (string aUsername);
 
 		// @required -(NSArray *)getSelfIdsOnOtherPlatformWithError:(EMError **)pError;
@@ -1085,7 +1085,7 @@ namespace Hyphenate.iOS.Lib
 		// @required -(void)getSelfIdsOnOtherPlatformWithCompletion:(void (^)(NSArray *, EMError *))aCompletionBlock;
 		[Abstract]
 		[Export ("getSelfIdsOnOtherPlatformWithCompletion:")]
-		void GetSelfIdsOnOtherPlatformWithCompletion (Action<NSArray, EMError> aCompletionBlock);
+		void GetSelfIdsOnOtherPlatformWithCompletion ([NullAllowed] Action<NSArray, EMError> aCompletionBlock);
 
 		// @required -(void)addDelegate:(id<EMContactManagerDelegate>)aDelegate __attribute__((deprecated("")));
 		[Abstract]
@@ -1094,25 +1094,25 @@ namespace Hyphenate.iOS.Lib
 
 		// @required -(NSArray *)getContactsFromDB __attribute__((deprecated("Use -getContacts")));
 		[Abstract]
-		[Export ("getContactsFromDB")]
+		[NullAllowed, Export ("getContactsFromDB")]
 		//[Verify (MethodToProperty), Verify (StronglyTypedNSArray)]
 		NSObject[] ContactsFromDB { get; }
 
 		// @required -(NSArray *)getBlackListFromDB __attribute__((deprecated("Use -getBlackList")));
 		[Abstract]
-		[Export ("getBlackListFromDB")]
+		[NullAllowed, Export ("getBlackListFromDB")]
 		//[Verify (MethodToProperty), Verify (StronglyTypedNSArray)]
 		NSObject[] BlackListFromDB { get; }
 
 		// @required -(void)asyncGetContactsFromServer:(void (^)(NSArray *))aSuccessBlock failure:(void (^)(EMError *))aFailureBlock __attribute__((deprecated("Use -getContactsFromServerWithCompletion:")));
 		[Abstract]
 		[Export ("asyncGetContactsFromServer:failure:")]
-		void AsyncGetContactsFromServer (Action<NSArray> aSuccessBlock, Action<EMError> aFailureBlock);
+		void AsyncGetContactsFromServer ([NullAllowed] Action<NSArray> aSuccessBlock, [NullAllowed] Action<EMError> aFailureBlock);
 
 		// @required -(void)asyncAddContact:(NSString *)aUsername message:(NSString *)aMessage success:(void (^)())aSuccessBlock failure:(void (^)(EMError *))aFailureBlock __attribute__((deprecated("Use -addContact:message:completion:")));
 		[Abstract]
 		[Export ("asyncAddContact:message:success:failure:")]
-		void AsyncAddContact (string aUsername, string aMessage, Action aSuccessBlock, Action<EMError> aFailureBlock);
+		void AsyncAddContact (string aUsername, string aMessage, [NullAllowed] Action aSuccessBlock, [NullAllowed] Action<EMError> aFailureBlock);
 
 		// @required -(EMError *)deleteContact:(NSString *)aUsername __attribute__((deprecated("Use -deleteContact:username:isDeleteConversation:")));
 		[Abstract]
@@ -1122,37 +1122,37 @@ namespace Hyphenate.iOS.Lib
 		// @required -(void)deleteContact:(NSString *)aUsername completion:(void (^)(NSString *, EMError *))aCompletionBlock __attribute__((deprecated("Use -deleteContact:username:isDeleteConversation:")));
 		[Abstract]
 		[Export ("deleteContact:completion:")]
-		void DeleteContact (string aUsername, Action<NSString, EMError> aCompletionBlock);
+		void DeleteContact (string aUsername, [NullAllowed] Action<NSString, EMError> aCompletionBlock);
 
 		// @required -(void)asyncDeleteContact:(NSString *)aUsername success:(void (^)())aSuccessBlock failure:(void (^)(EMError *))aFailureBlock __attribute__((deprecated("Use -deleteContact:completion:")));
 		[Abstract]
 		[Export ("asyncDeleteContact:success:failure:")]
-		void AsyncDeleteContact (string aUsername, Action aSuccessBlock, Action<EMError> aFailureBlock);
+		void AsyncDeleteContact (string aUsername, [NullAllowed] Action aSuccessBlock, [NullAllowed] Action<EMError> aFailureBlock);
 
 		// @required -(void)asyncGetBlackListFromServer:(void (^)(NSArray *))aSuccessBlock failure:(void (^)(EMError *))aFailureBlock __attribute__((deprecated("Use -getBlackListFromServerWithCompletion:")));
 		[Abstract]
 		[Export ("asyncGetBlackListFromServer:failure:")]
-		void AsyncGetBlackListFromServer (Action<NSArray> aSuccessBlock, Action<EMError> aFailureBlock);
+		void AsyncGetBlackListFromServer ([NullAllowed] Action<NSArray> aSuccessBlock, [NullAllowed] Action<EMError> aFailureBlock);
 
 		// @required -(void)asyncAddUserToBlackList:(NSString *)aUsername relationshipBoth:(BOOL)aBoth success:(void (^)())aSuccessBlock failure:(void (^)(EMError *))aFailureBlock __attribute__((deprecated("Use -addUserToBlackList:completion:")));
 		[Abstract]
 		[Export ("asyncAddUserToBlackList:relationshipBoth:success:failure:")]
-		void AsyncAddUserToBlackList (string aUsername, bool aBoth, Action aSuccessBlock, Action<EMError> aFailureBlock);
+		void AsyncAddUserToBlackList (string aUsername, bool aBoth, [NullAllowed] Action aSuccessBlock, [NullAllowed] Action<EMError> aFailureBlock);
 
 		// @required -(void)asyncRemoveUserFromBlackList:(NSString *)aUsername success:(void (^)())aSuccessBlock failure:(void (^)(EMError *))aFailureBlock __attribute__((deprecated("Use -removeUserFromBlackList:completion:")));
 		[Abstract]
 		[Export ("asyncRemoveUserFromBlackList:success:failure:")]
-		void AsyncRemoveUserFromBlackList (string aUsername, Action aSuccessBlock, Action<EMError> aFailureBlock);
+		void AsyncRemoveUserFromBlackList (string aUsername, [NullAllowed] Action aSuccessBlock, [NullAllowed] Action<EMError> aFailureBlock);
 
 		// @required -(void)asyncAcceptInvitationForUsername:(NSString *)aUsername success:(void (^)())aSuccessBlock failure:(void (^)(EMError *))aFailureBlock __attribute__((deprecated("Use -approveFriendRequestFromUser:completion:")));
 		[Abstract]
 		[Export ("asyncAcceptInvitationForUsername:success:failure:")]
-		void AsyncAcceptInvitationForUsername (string aUsername, Action aSuccessBlock, Action<EMError> aFailureBlock);
+		void AsyncAcceptInvitationForUsername (string aUsername, [NullAllowed] Action aSuccessBlock, [NullAllowed] Action<EMError> aFailureBlock);
 
 		// @required -(void)asyncDeclineInvitationForUsername:(NSString *)aUsername success:(void (^)())aSuccessBlock failure:(void (^)(EMError *))aFailureBlock __attribute__((deprecated("Use -declineFriendRequestFromUser:completion:")));
 		[Abstract]
 		[Export ("asyncDeclineInvitationForUsername:success:failure:")]
-		void AsyncDeclineInvitationForUsername (string aUsername, Action aSuccessBlock, Action<EMError> aFailureBlock);
+		void AsyncDeclineInvitationForUsername (string aUsername, [NullAllowed] Action aSuccessBlock, [NullAllowed] Action<EMError> aFailureBlock);
 	}
 
     partial interface IEMGroupManagerDelegate {}
@@ -1296,7 +1296,7 @@ namespace Hyphenate.iOS.Lib
 		bool IsInviteNeedConfirm { get; set; }
 
 		// @property (nonatomic, strong) NSString * ext;
-		[Export ("ext", ArgumentSemantic.Strong)]
+		[NullAllowed, Export ("ext", ArgumentSemantic.Strong)]
 		string Ext { get; set; }
 	}
 
@@ -1305,51 +1305,51 @@ namespace Hyphenate.iOS.Lib
 	interface EMGroup
 	{
 		// @property (readonly, copy, nonatomic) NSString * groupId;
-		[Export ("groupId")]
+		[NullAllowed, Export ("groupId")]
 		string GroupId { get; }
 
 		// @property (readonly, copy, nonatomic) NSString * subject;
-		[Export ("subject")]
+		[NullAllowed, Export ("subject")]
 		string Subject { get; }
 
 		// @property (readonly, copy, nonatomic) NSString * description;
-		[Export ("description")]
+		[NullAllowed, Export ("description")]
 		string GroupDescription { get; }
 
 		// @property (readonly, copy, nonatomic) NSString * announcement;
-		[Export ("announcement")]
+		[NullAllowed, Export ("announcement")]
 		string Announcement { get; }
 
 		// @property (readonly, nonatomic, strong) EMGroupOptions * setting;
-		[Export ("setting", ArgumentSemantic.Strong)]
+		[NullAllowed, Export ("setting", ArgumentSemantic.Strong)]
 		EMGroupOptions Setting { get; }
 
 		// @property (readonly, copy, nonatomic) NSString * owner;
-		[Export ("owner")]
+		[NullAllowed, Export ("owner")]
 		string Owner { get; }
 
 		// @property (readonly, copy, nonatomic) NSArray * adminList;
-		[Export ("adminList", ArgumentSemantic.Copy)]
+		[NullAllowed, Export ("adminList", ArgumentSemantic.Copy)]
 		//[Verify (StronglyTypedNSArray)]
 		NSObject[] AdminList { get; }
 
 		// @property (readonly, copy, nonatomic) NSArray * memberList;
-		[Export ("memberList", ArgumentSemantic.Copy)]
+		[NullAllowed, Export ("memberList", ArgumentSemantic.Copy)]
 		//[Verify (StronglyTypedNSArray)]
 		NSObject[] MemberList { get; }
 
 		// @property (readonly, nonatomic, strong) NSArray * blacklist;
-		[Export ("blacklist", ArgumentSemantic.Strong)]
+		[NullAllowed, Export ("blacklist", ArgumentSemantic.Strong)]
 		//[Verify (StronglyTypedNSArray)]
 		NSObject[] Blacklist { get; }
 
 		// @property (readonly, nonatomic, strong) NSArray * muteList;
-		[Export ("muteList", ArgumentSemantic.Strong)]
+		[NullAllowed, Export ("muteList", ArgumentSemantic.Strong)]
 		//[Verify (StronglyTypedNSArray)]
 		NSObject[] MuteList { get; }
 
 		// @property (readonly, nonatomic, strong) NSArray * sharedFileList;
-		[Export ("sharedFileList", ArgumentSemantic.Strong)]
+		[NullAllowed, Export ("sharedFileList", ArgumentSemantic.Strong)]
 		//[Verify (StronglyTypedNSArray)]
 		NSObject[] SharedFileList { get; }
 
@@ -1370,7 +1370,7 @@ namespace Hyphenate.iOS.Lib
 		EMGroupPermissionType PermissionType { get; }
 
 		// @property (readonly, nonatomic, strong) NSArray * occupants;
-		[Export ("occupants", ArgumentSemantic.Strong)]
+		[NullAllowed, Export ("occupants", ArgumentSemantic.Strong)]
 		//[Verify (StronglyTypedNSArray)]
 		NSObject[] Occupants { get; }
 
@@ -1384,12 +1384,12 @@ namespace Hyphenate.iOS.Lib
 		EMGroup GroupWithId (string aGroupId);
 
 		// @property (readonly, copy, nonatomic) NSArray * members __attribute__((deprecated("")));
-		[Export ("members", ArgumentSemantic.Copy)]
+		[NullAllowed, Export ("members", ArgumentSemantic.Copy)]
 		//[Verify (StronglyTypedNSArray)]
 		NSObject[] Members { get; }
 
 		// @property (readonly, nonatomic, strong) NSArray * blackList __attribute__((deprecated("")));
-		[Export ("blackList", ArgumentSemantic.Strong)]
+		[NullAllowed, Export ("blackList", ArgumentSemantic.Strong)]
 		//[Verify (StronglyTypedNSArray)]
 		NSObject[] BlackList { get; }
 
@@ -1398,7 +1398,7 @@ namespace Hyphenate.iOS.Lib
 		nint MembersCount { get; }
 
 		// @property (readonly, nonatomic, strong) NSArray * bans __attribute__((deprecated("Use - blackList")));
-		[Export ("bans", ArgumentSemantic.Strong)]
+		[NullAllowed, Export ("bans", ArgumentSemantic.Strong)]
 		//[Verify (StronglyTypedNSArray)]
 		NSObject[] Bans { get; }
 	}
@@ -1408,15 +1408,15 @@ namespace Hyphenate.iOS.Lib
 	interface EMGroupSharedFile
 	{
 		// @property (readonly, copy, nonatomic) NSString * fileId;
-		[Export ("fileId")]
+		[NullAllowed, Export ("fileId")]
 		string FileId { get; }
 
 		// @property (readonly, copy, nonatomic) NSString * fileName;
-		[Export ("fileName")]
+		[NullAllowed, Export ("fileName")]
 		string FileName { get; }
 
 		// @property (readonly, copy, nonatomic) NSString * fileOwner;
-		[Export ("fileOwner")]
+		[NullAllowed, Export ("fileOwner")]
 		string FileOwner { get; }
 
 		// @property (nonatomic) long long createTime;
@@ -1452,50 +1452,50 @@ namespace Hyphenate.iOS.Lib
 
 		// @required -(NSArray *)getJoinedGroups;
 		[Abstract]
-		[Export ("getJoinedGroups")]
+		[NullAllowed, Export ("getJoinedGroups")]
 		//[Verify (MethodToProperty), Verify (StronglyTypedNSArray)]
 		NSObject[] JoinedGroups { get; }
 
 		// @required -(NSArray *)getGroupsWithoutPushNotification:(EMError **)pError;
 		[Abstract]
-		[Export ("getGroupsWithoutPushNotification:")]
+		[NullAllowed, Export ("getGroupsWithoutPushNotification:")]
 		//[Verify (StronglyTypedNSArray)]
 		NSObject[] GetGroupsWithoutPushNotification (out EMError pError);
 
 		// @required -(NSArray *)getJoinedGroupsFromServerWithPage:(NSInteger)aPageNum pageSize:(NSInteger)aPageSize error:(EMError **)pError;
 		[Abstract]
-		[Export ("getJoinedGroupsFromServerWithPage:pageSize:error:")]
+		[NullAllowed, Export ("getJoinedGroupsFromServerWithPage:pageSize:error:")]
 		//[Verify (StronglyTypedNSArray)]
 		NSObject[] GetJoinedGroupsFromServerWithPage (nint aPageNum, nint aPageSize, out EMError pError);
 
 		// @required -(void)getJoinedGroupsFromServerWithPage:(NSInteger)aPageNum pageSize:(NSInteger)aPageSize completion:(void (^)(NSArray *, EMError *))aCompletionBlock;
 		[Abstract]
 		[Export ("getJoinedGroupsFromServerWithPage:pageSize:completion:")]
-		void GetJoinedGroupsFromServerWithPage (nint aPageNum, nint aPageSize, Action<NSArray, EMError> aCompletionBlock);
+		void GetJoinedGroupsFromServerWithPage (nint aPageNum, nint aPageSize, [NullAllowed] Action<NSArray, EMError> aCompletionBlock);
 
 		// @required -(EMCursorResult *)getPublicGroupsFromServerWithCursor:(NSString *)aCursor pageSize:(NSInteger)aPageSize error:(EMError **)pError;
 		[Abstract]
-		[Export ("getPublicGroupsFromServerWithCursor:pageSize:error:")]
+		[NullAllowed, Export ("getPublicGroupsFromServerWithCursor:pageSize:error:")]
 		EMCursorResult GetPublicGroupsFromServerWithCursor (string aCursor, nint aPageSize, out EMError pError);
 
 		// @required -(void)getPublicGroupsFromServerWithCursor:(NSString *)aCursor pageSize:(NSInteger)aPageSize completion:(void (^)(EMCursorResult *, EMError *))aCompletionBlock;
 		[Abstract]
 		[Export ("getPublicGroupsFromServerWithCursor:pageSize:completion:")]
-		void GetPublicGroupsFromServerWithCursor (string aCursor, nint aPageSize, Action<EMCursorResult, EMError> aCompletionBlock);
+		void GetPublicGroupsFromServerWithCursor (string aCursor, nint aPageSize, [NullAllowed] Action<EMCursorResult, EMError> aCompletionBlock);
 
 		// @required -(EMGroup *)searchPublicGroupWithId:(NSString *)aGroundId error:(EMError **)pError;
 		[Abstract]
-		[Export ("searchPublicGroupWithId:error:")]
+		[NullAllowed, Export ("searchPublicGroupWithId:error:")]
 		EMGroup SearchPublicGroupWithId (string aGroundId, out EMError pError);
 
 		// @required -(void)searchPublicGroupWithId:(NSString *)aGroundId completion:(void (^)(EMGroup *, EMError *))aCompletionBlock;
 		[Abstract]
 		[Export ("searchPublicGroupWithId:completion:")]
-		void SearchPublicGroupWithId (string aGroundId, Action<EMGroup, EMError> aCompletionBlock);
+		void SearchPublicGroupWithId (string aGroundId, [NullAllowed] Action<EMGroup, EMError> aCompletionBlock);
 
 		// @required -(EMGroup *)createGroupWithSubject:(NSString *)aSubject description:(NSString *)aDescription invitees:(NSArray *)aInvitees message:(NSString *)aMessage setting:(EMGroupOptions *)aSetting error:(EMError **)pError;
 		[Abstract]
-		[Export ("createGroupWithSubject:description:invitees:message:setting:error:")]
+		[NullAllowed, Export ("createGroupWithSubject:description:invitees:message:setting:error:")]
 		//[Verify (StronglyTypedNSArray)]
 		EMGroup CreateGroupWithSubject (string aSubject, string aDescription, NSObject[] aInvitees, string aMessage, EMGroupOptions aSetting, out EMError pError);
 
@@ -1503,74 +1503,74 @@ namespace Hyphenate.iOS.Lib
 		[Abstract]
 		[Export ("createGroupWithSubject:description:invitees:message:setting:completion:")]
 		//[Verify (StronglyTypedNSArray)]
-		void CreateGroupWithSubject (string aSubject, string aDescription, NSObject[] aInvitees, string aMessage, EMGroupOptions aSetting, Action<EMGroup, EMError> aCompletionBlock);
+		void CreateGroupWithSubject (string aSubject, string aDescription, NSObject[] aInvitees, string aMessage, EMGroupOptions aSetting, [NullAllowed] Action<EMGroup, EMError> aCompletionBlock);
 
 		// @required -(EMGroup *)getGroupSpecificationFromServerWithId:(NSString *)aGroupId error:(EMError **)pError;
 		[Abstract]
-		[Export ("getGroupSpecificationFromServerWithId:error:")]
+		[NullAllowed, Export ("getGroupSpecificationFromServerWithId:error:")]
 		EMGroup GetGroupSpecificationFromServerWithId (string aGroupId, out EMError pError);
 
 		// @required -(void)getGroupSpecificationFromServerWithId:(NSString *)aGroupId completion:(void (^)(EMGroup *, EMError *))aCompletionBlock;
 		[Abstract]
 		[Export ("getGroupSpecificationFromServerWithId:completion:")]
-		void GetGroupSpecificationFromServerWithId (string aGroupId, Action<EMGroup, EMError> aCompletionBlock);
+		void GetGroupSpecificationFromServerWithId (string aGroupId, [NullAllowed] Action<EMGroup, EMError> aCompletionBlock);
 
 		// @required -(EMCursorResult *)getGroupMemberListFromServerWithId:(NSString *)aGroupId cursor:(NSString *)aCursor pageSize:(NSInteger)aPageSize error:(EMError **)pError;
 		[Abstract]
-		[Export ("getGroupMemberListFromServerWithId:cursor:pageSize:error:")]
+		[NullAllowed, Export ("getGroupMemberListFromServerWithId:cursor:pageSize:error:")]
 		EMCursorResult GetGroupMemberListFromServerWithId (string aGroupId, string aCursor, nint aPageSize, out EMError pError);
 
 		// @required -(void)getGroupMemberListFromServerWithId:(NSString *)aGroupId cursor:(NSString *)aCursor pageSize:(NSInteger)aPageSize completion:(void (^)(EMCursorResult *, EMError *))aCompletionBlock;
 		[Abstract]
 		[Export ("getGroupMemberListFromServerWithId:cursor:pageSize:completion:")]
-		void GetGroupMemberListFromServerWithId (string aGroupId, string aCursor, nint aPageSize, Action<EMCursorResult, EMError> aCompletionBlock);
+		void GetGroupMemberListFromServerWithId (string aGroupId, string aCursor, nint aPageSize, [NullAllowed] Action<EMCursorResult, EMError> aCompletionBlock);
 
 		// @required -(NSArray *)getGroupBlacklistFromServerWithId:(NSString *)aGroupId pageNumber:(NSInteger)aPageNum pageSize:(NSInteger)aPageSize error:(EMError **)pError;
 		[Abstract]
-		[Export ("getGroupBlacklistFromServerWithId:pageNumber:pageSize:error:")]
+		[NullAllowed, Export ("getGroupBlacklistFromServerWithId:pageNumber:pageSize:error:")]
 		//[Verify (StronglyTypedNSArray)]
 		NSObject[] GetGroupBlacklistFromServerWithId (string aGroupId, nint aPageNum, nint aPageSize, out EMError pError);
 
 		// @required -(void)getGroupBlacklistFromServerWithId:(NSString *)aGroupId pageNumber:(NSInteger)aPageNum pageSize:(NSInteger)aPageSize completion:(void (^)(NSArray *, EMError *))aCompletionBlock;
 		[Abstract]
 		[Export ("getGroupBlacklistFromServerWithId:pageNumber:pageSize:completion:")]
-		void GetGroupBlacklistFromServerWithId (string aGroupId, nint aPageNum, nint aPageSize, Action<NSArray, EMError> aCompletionBlock);
+		void GetGroupBlacklistFromServerWithId (string aGroupId, nint aPageNum, nint aPageSize, [NullAllowed] Action<NSArray, EMError> aCompletionBlock);
 
 		// @required -(NSArray *)getGroupMuteListFromServerWithId:(NSString *)aGroupId pageNumber:(NSInteger)aPageNum pageSize:(NSInteger)aPageSize error:(EMError **)pError;
 		[Abstract]
-		[Export ("getGroupMuteListFromServerWithId:pageNumber:pageSize:error:")]
+		[NullAllowed, Export ("getGroupMuteListFromServerWithId:pageNumber:pageSize:error:")]
 		//[Verify (StronglyTypedNSArray)]
 		NSObject[] GetGroupMuteListFromServerWithId (string aGroupId, nint aPageNum, nint aPageSize, out EMError pError);
 
 		// @required -(void)getGroupMuteListFromServerWithId:(NSString *)aGroupId pageNumber:(NSInteger)aPageNum pageSize:(NSInteger)aPageSize completion:(void (^)(NSArray *, EMError *))aCompletionBlock;
 		[Abstract]
 		[Export ("getGroupMuteListFromServerWithId:pageNumber:pageSize:completion:")]
-		void GetGroupMuteListFromServerWithId (string aGroupId, nint aPageNum, nint aPageSize, Action<NSArray, EMError> aCompletionBlock);
+		void GetGroupMuteListFromServerWithId (string aGroupId, nint aPageNum, nint aPageSize, [NullAllowed] Action<NSArray, EMError> aCompletionBlock);
 
 		// @required -(NSArray *)getGroupFileListWithId:(NSString *)aGroupId pageNumber:(NSInteger)aPageNum pageSize:(NSInteger)aPageSize error:(EMError **)pError;
 		[Abstract]
-		[Export ("getGroupFileListWithId:pageNumber:pageSize:error:")]
+		[NullAllowed, Export ("getGroupFileListWithId:pageNumber:pageSize:error:")]
 		//[Verify (StronglyTypedNSArray)]
 		NSObject[] GetGroupFileListWithId (string aGroupId, nint aPageNum, nint aPageSize, out EMError pError);
 
 		// @required -(void)getGroupFileListWithId:(NSString *)aGroupId pageNumber:(NSInteger)aPageNum pageSize:(NSInteger)aPageSize completion:(void (^)(NSArray *, EMError *))aCompletionBlock;
 		[Abstract]
 		[Export ("getGroupFileListWithId:pageNumber:pageSize:completion:")]
-		void GetGroupFileListWithId (string aGroupId, nint aPageNum, nint aPageSize, Action<NSArray, EMError> aCompletionBlock);
+		void GetGroupFileListWithId (string aGroupId, nint aPageNum, nint aPageSize, [NullAllowed] Action<NSArray, EMError> aCompletionBlock);
 
 		// @required -(NSString *)getGroupAnnouncementWithId:(NSString *)aGroupId error:(EMError **)pError;
 		[Abstract]
-		[Export ("getGroupAnnouncementWithId:error:")]
+		[NullAllowed, Export ("getGroupAnnouncementWithId:error:")]
 		string GetGroupAnnouncementWithId (string aGroupId, out EMError pError);
 
 		// @required -(void)getGroupAnnouncementWithId:(NSString *)aGroupId completion:(void (^)(NSString *, EMError *))aCompletionBlock;
 		[Abstract]
 		[Export ("getGroupAnnouncementWithId:completion:")]
-		void GetGroupAnnouncementWithId (string aGroupId, Action<NSString, EMError> aCompletionBlock);
+		void GetGroupAnnouncementWithId (string aGroupId, [NullAllowed] Action<NSString, EMError> aCompletionBlock);
 
 		// @required -(EMGroup *)addOccupants:(NSArray *)aOccupants toGroup:(NSString *)aGroupId welcomeMessage:(NSString *)aWelcomeMessage error:(EMError **)pError;
 		[Abstract]
-		[Export ("addOccupants:toGroup:welcomeMessage:error:")]
+		[NullAllowed, Export ("addOccupants:toGroup:welcomeMessage:error:")]
 		//[Verify (StronglyTypedNSArray)]
 		EMGroup AddOccupants (NSObject[] aOccupants, string aGroupId, string aWelcomeMessage, out EMError pError);
 
@@ -1578,11 +1578,11 @@ namespace Hyphenate.iOS.Lib
 		[Abstract]
 		[Export ("addMembers:toGroup:message:completion:")]
 		//[Verify (StronglyTypedNSArray)]
-		void AddMembers (NSObject[] aUsers, string aGroupId, string aMessage, Action<EMGroup, EMError> aCompletionBlock);
+		void AddMembers (NSObject[] aUsers, string aGroupId, string aMessage, [NullAllowed] Action<EMGroup, EMError> aCompletionBlock);
 
 		// @required -(EMGroup *)removeOccupants:(NSArray *)aOccupants fromGroup:(NSString *)aGroupId error:(EMError **)pError;
 		[Abstract]
-		[Export ("removeOccupants:fromGroup:error:")]
+		[NullAllowed, Export ("removeOccupants:fromGroup:error:")]
 		//[Verify (StronglyTypedNSArray)]
 		EMGroup RemoveOccupants (NSObject[] aOccupants, string aGroupId, out EMError pError);
 
@@ -1590,11 +1590,11 @@ namespace Hyphenate.iOS.Lib
 		[Abstract]
 		[Export ("removeMembers:fromGroup:completion:")]
 		//[Verify (StronglyTypedNSArray)]
-		void RemoveMembers (NSObject[] aUsers, string aGroupId, Action<EMGroup, EMError> aCompletionBlock);
+		void RemoveMembers (NSObject[] aUsers, string aGroupId, [NullAllowed] Action<EMGroup, EMError> aCompletionBlock);
 
 		// @required -(EMGroup *)blockOccupants:(NSArray *)aOccupants fromGroup:(NSString *)aGroupId error:(EMError **)pError;
 		[Abstract]
-		[Export ("blockOccupants:fromGroup:error:")]
+		[NullAllowed, Export ("blockOccupants:fromGroup:error:")]
 		//[Verify (StronglyTypedNSArray)]
 		EMGroup BlockOccupants (NSObject[] aOccupants, string aGroupId, out EMError pError);
 
@@ -1602,11 +1602,11 @@ namespace Hyphenate.iOS.Lib
 		[Abstract]
 		[Export ("blockMembers:fromGroup:completion:")]
 		//[Verify (StronglyTypedNSArray)]
-		void BlockMembers (NSObject[] aMembers, string aGroupId, Action<EMGroup, EMError> aCompletionBlock);
+		void BlockMembers (NSObject[] aMembers, string aGroupId, [NullAllowed] Action<EMGroup, EMError> aCompletionBlock);
 
 		// @required -(EMGroup *)unblockOccupants:(NSArray *)aOccupants forGroup:(NSString *)aGroupId error:(EMError **)pError;
 		[Abstract]
-		[Export ("unblockOccupants:forGroup:error:")]
+		[NullAllowed, Export ("unblockOccupants:forGroup:error:")]
 		//[Verify (StronglyTypedNSArray)]
 		EMGroup UnblockOccupants (NSObject[] aOccupants, string aGroupId, out EMError pError);
 
@@ -1614,27 +1614,27 @@ namespace Hyphenate.iOS.Lib
 		[Abstract]
 		[Export ("unblockMembers:fromGroup:completion:")]
 		//[Verify (StronglyTypedNSArray)]
-		void UnblockMembers (NSObject[] aMembers, string aGroupId, Action<EMGroup, EMError> aCompletionBlock);
+		void UnblockMembers (NSObject[] aMembers, string aGroupId, [NullAllowed] Action<EMGroup, EMError> aCompletionBlock);
 
 		// @required -(EMGroup *)changeGroupSubject:(NSString *)aSubject forGroup:(NSString *)aGroupId error:(EMError **)pError;
 		[Abstract]
-		[Export ("changeGroupSubject:forGroup:error:")]
+		[NullAllowed, Export ("changeGroupSubject:forGroup:error:")]
 		EMGroup ChangeGroupSubject (string aSubject, string aGroupId, out EMError pError);
 
 		// @required -(void)updateGroupSubject:(NSString *)aSubject forGroup:(NSString *)aGroupId completion:(void (^)(EMGroup *, EMError *))aCompletionBlock;
 		[Abstract]
 		[Export ("updateGroupSubject:forGroup:completion:")]
-		void UpdateGroupSubject (string aSubject, string aGroupId, Action<EMGroup, EMError> aCompletionBlock);
+		void UpdateGroupSubject (string aSubject, string aGroupId, [NullAllowed] Action<EMGroup, EMError> aCompletionBlock);
 
 		// @required -(EMGroup *)changeDescription:(NSString *)aDescription forGroup:(NSString *)aGroupId error:(EMError **)pError;
 		[Abstract]
-		[Export ("changeDescription:forGroup:error:")]
+		[NullAllowed, Export ("changeDescription:forGroup:error:")]
 		EMGroup ChangeDescription (string aDescription, string aGroupId, out EMError pError);
 
 		// @required -(void)updateDescription:(NSString *)aDescription forGroup:(NSString *)aGroupId completion:(void (^)(EMGroup *, EMError *))aCompletionBlock;
 		[Abstract]
 		[Export ("updateDescription:forGroup:completion:")]
-		void UpdateDescription (string aDescription, string aGroupId, Action<EMGroup, EMError> aCompletionBlock);
+		void UpdateDescription (string aDescription, string aGroupId, [NullAllowed] Action<EMGroup, EMError> aCompletionBlock);
 
 		// @required -(void)leaveGroup:(NSString *)aGroupId error:(EMError **)pError;
 		[Abstract]
@@ -1644,37 +1644,37 @@ namespace Hyphenate.iOS.Lib
 		// @required -(void)leaveGroup:(NSString *)aGroupId completion:(void (^)(EMError *))aCompletionBlock;
 		[Abstract]
 		[Export ("leaveGroup:completion:")]
-		void LeaveGroup (string aGroupId, Action<EMError> aCompletionBlock);
+		void LeaveGroup (string aGroupId, [NullAllowed] Action<EMError> aCompletionBlock);
 
 		// @required -(EMError *)destroyGroup:(NSString *)aGroupId;
 		[Abstract]
-		[Export ("destroyGroup:")]
+		[NullAllowed, Export ("destroyGroup:")]
 		EMError DestroyGroup (string aGroupId);
 
 		// @required -(void)destroyGroup:(NSString *)aGroupId finishCompletion:(void (^)(EMError *))aCompletionBlock;
 		[Abstract]
 		[Export ("destroyGroup:finishCompletion:")]
-		void DestroyGroup (string aGroupId, Action<EMError> aCompletionBlock);
+		void DestroyGroup (string aGroupId, [NullAllowed] Action<EMError> aCompletionBlock);
 
 		// @required -(EMGroup *)blockGroup:(NSString *)aGroupId error:(EMError **)pError;
 		[Abstract]
-		[Export ("blockGroup:error:")]
+		[NullAllowed, Export ("blockGroup:error:")]
 		EMGroup BlockGroup (string aGroupId, out EMError pError);
 
 		// @required -(void)blockGroup:(NSString *)aGroupId completion:(void (^)(EMGroup *, EMError *))aCompletionBlock;
 		[Abstract]
 		[Export ("blockGroup:completion:")]
-		void BlockGroup (string aGroupId, Action<EMGroup, EMError> aCompletionBlock);
+		void BlockGroup (string aGroupId, [NullAllowed] Action<EMGroup, EMError> aCompletionBlock);
 
 		// @required -(EMGroup *)unblockGroup:(NSString *)aGroupId error:(EMError **)pError;
 		[Abstract]
-		[Export ("unblockGroup:error:")]
+		[NullAllowed, Export ("unblockGroup:error:")]
 		EMGroup UnblockGroup (string aGroupId, out EMError pError);
 
 		// @required -(void)unblockGroup:(NSString *)aGroupId completion:(void (^)(EMGroup *, EMError *))aCompletionBlock;
 		[Abstract]
 		[Export ("unblockGroup:completion:")]
-		void UnblockGroup (string aGroupId, Action<EMGroup, EMError> aCompletionBlock);
+		void UnblockGroup (string aGroupId, [NullAllowed] Action<EMGroup, EMError> aCompletionBlock);
 
 		// @required -(EMGroup *)updateGroupOwner:(NSString *)aGroupId newOwner:(NSString *)aNewOwner error:(EMError **)pError;
 		[Abstract]
@@ -1684,17 +1684,17 @@ namespace Hyphenate.iOS.Lib
 		// @required -(void)updateGroupOwner:(NSString *)aGroupId newOwner:(NSString *)aNewOwner completion:(void (^)(EMGroup *, EMError *))aCompletionBlock;
 		[Abstract]
 		[Export ("updateGroupOwner:newOwner:completion:")]
-		void UpdateGroupOwner (string aGroupId, string aNewOwner, Action<EMGroup, EMError> aCompletionBlock);
+		void UpdateGroupOwner (string aGroupId, string aNewOwner, [NullAllowed] Action<EMGroup, EMError> aCompletionBlock);
 
 		// @required -(EMGroup *)addAdmin:(NSString *)aAdmin toGroup:(NSString *)aGroupId error:(EMError **)pError;
 		[Abstract]
-		[Export ("addAdmin:toGroup:error:")]
+		[NullAllowed, Export ("addAdmin:toGroup:error:")]
 		EMGroup AddAdmin (string aAdmin, string aGroupId, out EMError pError);
 
 		// @required -(void)addAdmin:(NSString *)aAdmin toGroup:(NSString *)aGroupId completion:(void (^)(EMGroup *, EMError *))aCompletionBlock;
 		[Abstract]
 		[Export ("addAdmin:toGroup:completion:")]
-		void AddAdmin (string aAdmin, string aGroupId, Action<EMGroup, EMError> aCompletionBlock);
+		void AddAdmin (string aAdmin, string aGroupId, [NullAllowed] Action<EMGroup, EMError> aCompletionBlock);
 
 		// @required -(EMGroup *)removeAdmin:(NSString *)aAdmin fromGroup:(NSString *)aGroupId error:(EMError **)pError;
 		[Abstract]
@@ -1704,11 +1704,11 @@ namespace Hyphenate.iOS.Lib
 		// @required -(void)removeAdmin:(NSString *)aAdmin fromGroup:(NSString *)aGroupId completion:(void (^)(EMGroup *, EMError *))aCompletionBlock;
 		[Abstract]
 		[Export ("removeAdmin:fromGroup:completion:")]
-		void RemoveAdmin (string aAdmin, string aGroupId, Action<EMGroup, EMError> aCompletionBlock);
+		void RemoveAdmin (string aAdmin, string aGroupId, [NullAllowed] Action<EMGroup, EMError> aCompletionBlock);
 
 		// @required -(EMGroup *)muteMembers:(NSArray *)aMuteMembers muteMilliseconds:(NSInteger)aMuteMilliseconds fromGroup:(NSString *)aGroupId error:(EMError **)pError;
 		[Abstract]
-		[Export ("muteMembers:muteMilliseconds:fromGroup:error:")]
+		[NullAllowed, Export ("muteMembers:muteMilliseconds:fromGroup:error:")]
 		//[Verify (StronglyTypedNSArray)]
 		EMGroup MuteMembers (NSObject[] aMuteMembers, nint aMuteMilliseconds, string aGroupId, out EMError pError);
 
@@ -1716,11 +1716,11 @@ namespace Hyphenate.iOS.Lib
 		[Abstract]
 		[Export ("muteMembers:muteMilliseconds:fromGroup:completion:")]
 		//[Verify (StronglyTypedNSArray)]
-		void MuteMembers (NSObject[] aMuteMembers, nint aMuteMilliseconds, string aGroupId, Action<EMGroup, EMError> aCompletionBlock);
+		void MuteMembers (NSObject[] aMuteMembers, nint aMuteMilliseconds, string aGroupId, [NullAllowed] Action<EMGroup, EMError> aCompletionBlock);
 
 		// @required -(EMGroup *)unmuteMembers:(NSArray *)aMembers fromGroup:(NSString *)aGroupId error:(EMError **)pError;
 		[Abstract]
-		[Export ("unmuteMembers:fromGroup:error:")]
+		[NullAllowed, Export ("unmuteMembers:fromGroup:error:")]
 		//[Verify (StronglyTypedNSArray)]
 		EMGroup UnmuteMembers (NSObject[] aMembers, string aGroupId, out EMError pError);
 
@@ -1728,171 +1728,171 @@ namespace Hyphenate.iOS.Lib
 		[Abstract]
 		[Export ("unmuteMembers:fromGroup:completion:")]
 		//[Verify (StronglyTypedNSArray)]
-		void UnmuteMembers (NSObject[] aMembers, string aGroupId, Action<EMGroup, EMError> aCompletionBlock);
+		void UnmuteMembers (NSObject[] aMembers, string aGroupId, [NullAllowed] Action<EMGroup, EMError> aCompletionBlock);
 
 		// @required -(void)uploadGroupSharedFileWithId:(NSString *)aGroupId filePath:(NSString *)aFilePath progress:(void (^)(int))aProgressBlock completion:(void (^)(EMGroupSharedFile *, EMError *))aCompletionBlock;
 		[Abstract]
 		[Export ("uploadGroupSharedFileWithId:filePath:progress:completion:")]
-		void UploadGroupSharedFileWithId (string aGroupId, string aFilePath, Action<int> aProgressBlock, Action<EMGroupSharedFile, EMError> aCompletionBlock);
+		void UploadGroupSharedFileWithId (string aGroupId, string aFilePath, [NullAllowed] Action<int> aProgressBlock, [NullAllowed] Action<EMGroupSharedFile, EMError> aCompletionBlock);
 
 		// @required -(void)downloadGroupSharedFileWithId:(NSString *)aGroupId filePath:(NSString *)aFilePath sharedFileId:(NSString *)aSharedFileId progress:(void (^)(int))aProgressBlock completion:(void (^)(EMGroup *, EMError *))aCompletionBlock;
 		[Abstract]
 		[Export ("downloadGroupSharedFileWithId:filePath:sharedFileId:progress:completion:")]
-		void DownloadGroupSharedFileWithId (string aGroupId, string aFilePath, string aSharedFileId, Action<int> aProgressBlock, Action<EMGroup, EMError> aCompletionBlock);
+		void DownloadGroupSharedFileWithId (string aGroupId, string aFilePath, string aSharedFileId, [NullAllowed] Action<int> aProgressBlock, [NullAllowed] Action<EMGroup, EMError> aCompletionBlock);
 
 		// @required -(EMGroup *)removeGroupSharedFileWithId:(NSString *)aGroupId sharedFileId:(NSString *)aSharedFileId error:(EMError **)pError;
 		[Abstract]
-		[Export ("removeGroupSharedFileWithId:sharedFileId:error:")]
+		[NullAllowed, Export ("removeGroupSharedFileWithId:sharedFileId:error:")]
 		EMGroup RemoveGroupSharedFileWithId (string aGroupId, string aSharedFileId, out EMError pError);
 
 		// @required -(void)removeGroupSharedFileWithId:(NSString *)aGroupId sharedFileId:(NSString *)aSharedFileId completion:(void (^)(EMGroup *, EMError *))aCompletionBlock;
 		[Abstract]
 		[Export ("removeGroupSharedFileWithId:sharedFileId:completion:")]
-		void RemoveGroupSharedFileWithId (string aGroupId, string aSharedFileId, Action<EMGroup, EMError> aCompletionBlock);
+		void RemoveGroupSharedFileWithId (string aGroupId, string aSharedFileId, [NullAllowed] Action<EMGroup, EMError> aCompletionBlock);
 
 		// @required -(EMGroup *)updateGroupAnnouncementWithId:(NSString *)aGroupId announcement:(NSString *)aAnnouncement error:(EMError **)pError;
 		[Abstract]
-		[Export ("updateGroupAnnouncementWithId:announcement:error:")]
+		[NullAllowed, Export ("updateGroupAnnouncementWithId:announcement:error:")]
 		EMGroup UpdateGroupAnnouncementWithId (string aGroupId, string aAnnouncement, out EMError pError);
 
 		// @required -(void)updateGroupAnnouncementWithId:(NSString *)aGroupId announcement:(NSString *)aAnnouncement completion:(void (^)(EMGroup *, EMError *))aCompletionBlock;
 		[Abstract]
 		[Export ("updateGroupAnnouncementWithId:announcement:completion:")]
-		void UpdateGroupAnnouncementWithId (string aGroupId, string aAnnouncement, Action<EMGroup, EMError> aCompletionBlock);
+		void UpdateGroupAnnouncementWithId (string aGroupId, string aAnnouncement, [NullAllowed] Action<EMGroup, EMError> aCompletionBlock);
 
 		// @required -(EMGroup *)updateGroupExtWithId:(NSString *)aGroupId ext:(NSString *)aExt error:(EMError **)pError;
 		[Abstract]
-		[Export ("updateGroupExtWithId:ext:error:")]
+		[NullAllowed, Export ("updateGroupExtWithId:ext:error:")]
 		EMGroup UpdateGroupExtWithId (string aGroupId, string aExt, out EMError pError);
 
 		// @required -(void)updateGroupExtWithId:(NSString *)aGroupId ext:(NSString *)aExt completion:(void (^)(EMGroup *, EMError *))aCompletionBlock;
 		[Abstract]
 		[Export ("updateGroupExtWithId:ext:completion:")]
-		void UpdateGroupExtWithId (string aGroupId, string aExt, Action<EMGroup, EMError> aCompletionBlock);
+		void UpdateGroupExtWithId (string aGroupId, string aExt, [NullAllowed] Action<EMGroup, EMError> aCompletionBlock);
 
 		// @required -(EMGroup *)joinPublicGroup:(NSString *)aGroupId error:(EMError **)pError;
 		[Abstract]
-		[Export ("joinPublicGroup:error:")]
+		[NullAllowed, Export ("joinPublicGroup:error:")]
 		EMGroup JoinPublicGroup (string aGroupId, out EMError pError);
 
 		// @required -(void)joinPublicGroup:(NSString *)aGroupId completion:(void (^)(EMGroup *, EMError *))aCompletionBlock;
 		[Abstract]
 		[Export ("joinPublicGroup:completion:")]
-		void JoinPublicGroup (string aGroupId, Action<EMGroup, EMError> aCompletionBlock);
+		void JoinPublicGroup (string aGroupId, [NullAllowed] Action<EMGroup, EMError> aCompletionBlock);
 
 		// @required -(EMGroup *)applyJoinPublicGroup:(NSString *)aGroupId message:(NSString *)aMessage error:(EMError **)pError;
 		[Abstract]
-		[Export ("applyJoinPublicGroup:message:error:")]
+		[NullAllowed, Export ("applyJoinPublicGroup:message:error:")]
 		EMGroup ApplyJoinPublicGroup (string aGroupId, string aMessage, out EMError pError);
 
 		// @required -(void)requestToJoinPublicGroup:(NSString *)aGroupId message:(NSString *)aMessage completion:(void (^)(EMGroup *, EMError *))aCompletionBlock;
 		[Abstract]
 		[Export ("requestToJoinPublicGroup:message:completion:")]
-		void RequestToJoinPublicGroup (string aGroupId, string aMessage, Action<EMGroup, EMError> aCompletionBlock);
+		void RequestToJoinPublicGroup (string aGroupId, string aMessage, [NullAllowed] Action<EMGroup, EMError> aCompletionBlock);
 
 		// @required -(EMError *)acceptJoinApplication:(NSString *)aGroupId applicant:(NSString *)aUsername;
 		[Abstract]
-		[Export ("acceptJoinApplication:applicant:")]
+		[NullAllowed, Export ("acceptJoinApplication:applicant:")]
 		EMError AcceptJoinApplication (string aGroupId, string aUsername);
 
 		// @required -(void)approveJoinGroupRequest:(NSString *)aGroupId sender:(NSString *)aUsername completion:(void (^)(EMGroup *, EMError *))aCompletionBlock;
 		[Abstract]
 		[Export ("approveJoinGroupRequest:sender:completion:")]
-		void ApproveJoinGroupRequest (string aGroupId, string aUsername, Action<EMGroup, EMError> aCompletionBlock);
+		void ApproveJoinGroupRequest (string aGroupId, string aUsername, [NullAllowed] Action<EMGroup, EMError> aCompletionBlock);
 
 		// @required -(EMError *)declineJoinApplication:(NSString *)aGroupId applicant:(NSString *)aUsername reason:(NSString *)aReason;
 		[Abstract]
-		[Export ("declineJoinApplication:applicant:reason:")]
+		[NullAllowed, Export ("declineJoinApplication:applicant:reason:")]
 		EMError DeclineJoinApplication (string aGroupId, string aUsername, string aReason);
 
 		// @required -(void)declineJoinGroupRequest:(NSString *)aGroupId sender:(NSString *)aUsername reason:(NSString *)aReason completion:(void (^)(EMGroup *, EMError *))aCompletionBlock;
 		[Abstract]
 		[Export ("declineJoinGroupRequest:sender:reason:completion:")]
-		void DeclineJoinGroupRequest (string aGroupId, string aUsername, string aReason, Action<EMGroup, EMError> aCompletionBlock);
+		void DeclineJoinGroupRequest (string aGroupId, string aUsername, string aReason, [NullAllowed] Action<EMGroup, EMError> aCompletionBlock);
 
 		// @required -(EMGroup *)acceptInvitationFromGroup:(NSString *)aGroupId inviter:(NSString *)aUsername error:(EMError **)pError;
 		[Abstract]
-		[Export ("acceptInvitationFromGroup:inviter:error:")]
+		[NullAllowed, Export ("acceptInvitationFromGroup:inviter:error:")]
 		EMGroup AcceptInvitationFromGroup (string aGroupId, string aUsername, out EMError pError);
 
 		// @required -(void)acceptInvitationFromGroup:(NSString *)aGroupId inviter:(NSString *)aUsername completion:(void (^)(EMGroup *, EMError *))aCompletionBlock;
 		[Abstract]
 		[Export ("acceptInvitationFromGroup:inviter:completion:")]
-		void AcceptInvitationFromGroup (string aGroupId, string aUsername, Action<EMGroup, EMError> aCompletionBlock);
+		void AcceptInvitationFromGroup (string aGroupId, string aUsername, [NullAllowed] Action<EMGroup, EMError> aCompletionBlock);
 
 		// @required -(EMError *)declineInvitationFromGroup:(NSString *)aGroupId inviter:(NSString *)aUsername reason:(NSString *)aReason;
 		[Abstract]
-		[Export ("declineInvitationFromGroup:inviter:reason:")]
+		[NullAllowed, Export ("declineInvitationFromGroup:inviter:reason:")]
 		EMError DeclineInvitationFromGroup (string aGroupId, string aUsername, string aReason);
 
 		// @required -(void)declineGroupInvitation:(NSString *)aGroupId inviter:(NSString *)aInviter reason:(NSString *)aReason completion:(void (^)(EMError *))aCompletionBlock;
 		[Abstract]
 		[Export ("declineGroupInvitation:inviter:reason:completion:")]
-		void DeclineGroupInvitation (string aGroupId, string aInviter, string aReason, Action<EMError> aCompletionBlock);
+		void DeclineGroupInvitation (string aGroupId, string aInviter, string aReason, [NullAllowed] Action<EMError> aCompletionBlock);
 
 		// @required -(EMError *)ignoreGroupPush:(NSString *)aGroupId ignore:(BOOL)aIsIgnore;
 		[Abstract]
-		[Export ("ignoreGroupPush:ignore:")]
+		[NullAllowed, Export ("ignoreGroupPush:ignore:")]
 		EMError IgnoreGroupPush (string aGroupId, bool aIsIgnore);
 
 		// @required -(EMError *)ignoreGroupsPush:(NSArray *)aGroupIDs ignore:(BOOL)aIsIgnore;
 		[Abstract]
-		[Export ("ignoreGroupsPush:ignore:")]
+		[NullAllowed, Export ("ignoreGroupsPush:ignore:")]
 		//[Verify (StronglyTypedNSArray)]
 		EMError IgnoreGroupsPush (NSObject[] aGroupIDs, bool aIsIgnore);
 
 		// @required -(void)updatePushServiceForGroup:(NSString *)aGroupId isPushEnabled:(BOOL)aIsEnable completion:(void (^)(EMGroup *, EMError *))aCompletionBlock;
 		[Abstract]
 		[Export ("updatePushServiceForGroup:isPushEnabled:completion:")]
-		void UpdatePushServiceForGroup (string aGroupId, bool aIsEnable, Action<EMGroup, EMError> aCompletionBlock);
+		void UpdatePushServiceForGroup (string aGroupId, bool aIsEnable, [NullAllowed] Action<EMGroup, EMError> aCompletionBlock);
 
 		// @required -(void)updatePushServiceForGroups:(NSArray *)aGroupIDs isPushEnabled:(BOOL)aIsEnable completion:(void (^)(NSArray *, EMError *))aCompletionBlock;
 		[Abstract]
 		[Export ("updatePushServiceForGroups:isPushEnabled:completion:")]
 		//[Verify (StronglyTypedNSArray)]
-		void UpdatePushServiceForGroups (NSObject[] aGroupIDs, bool aIsEnable, Action<NSArray, EMError> aCompletionBlock);
+		void UpdatePushServiceForGroups (NSObject[] aGroupIDs, bool aIsEnable, [NullAllowed] Action<NSArray, EMError> aCompletionBlock);
 
 		// @required -(NSArray *)getMyGroupsFromServerWithError:(EMError **)pError __attribute__((deprecated("")));
 		[Abstract]
-		[Export ("getMyGroupsFromServerWithError:")]
+		[NullAllowed, Export ("getMyGroupsFromServerWithError:")]
 		//[Verify (StronglyTypedNSArray)]
 		NSObject[] GetMyGroupsFromServerWithError (out EMError pError);
 
 		// @required -(void)getJoinedGroupsFromServerWithCompletion:(void (^)(NSArray *, EMError *))aCompletionBlock __attribute__((deprecated("")));
 		[Abstract]
 		[Export ("getJoinedGroupsFromServerWithCompletion:")]
-		void GetJoinedGroupsFromServerWithCompletion (Action<NSArray, EMError> aCompletionBlock);
+		void GetJoinedGroupsFromServerWithCompletion ([NullAllowed] Action<NSArray, EMError> aCompletionBlock);
 
 		// @required -(EMGroup *)fetchGroupInfo:(NSString *)aGroupId includeMembersList:(BOOL)aIncludeMembersList error:(EMError **)pError __attribute__((deprecated("")));
 		[Abstract]
-		[Export ("fetchGroupInfo:includeMembersList:error:")]
+		[NullAllowed, Export ("fetchGroupInfo:includeMembersList:error:")]
 		EMGroup FetchGroupInfo (string aGroupId, bool aIncludeMembersList, out EMError pError);
 
 		// @required -(void)getGroupSpecificationFromServerByID:(NSString *)aGroupID includeMembersList:(BOOL)aIncludeMembersList completion:(void (^)(EMGroup *, EMError *))aCompletionBlock __attribute__((deprecated("")));
 		[Abstract]
 		[Export ("getGroupSpecificationFromServerByID:includeMembersList:completion:")]
-		void GetGroupSpecificationFromServerByID (string aGroupID, bool aIncludeMembersList, Action<EMGroup, EMError> aCompletionBlock);
+		void GetGroupSpecificationFromServerByID (string aGroupID, bool aIncludeMembersList, [NullAllowed] Action<EMGroup, EMError> aCompletionBlock);
 
 		// @required -(NSArray *)fetchGroupBansList:(NSString *)aGroupId error:(EMError **)pError __attribute__((deprecated("")));
 		[Abstract]
-		[Export ("fetchGroupBansList:error:")]
+		[NullAllowed, Export ("fetchGroupBansList:error:")]
 		//[Verify (StronglyTypedNSArray)]
 		NSObject[] FetchGroupBansList (string aGroupId, out EMError pError);
 
 		// @required -(void)getGroupBlackListFromServerByID:(NSString *)aGroupId completion:(void (^)(NSArray *, EMError *))aCompletionBlock __attribute__((deprecated("")));
 		[Abstract]
 		[Export ("getGroupBlackListFromServerByID:completion:")]
-		void GetGroupBlackListFromServerByID (string aGroupId, Action<NSArray, EMError> aCompletionBlock);
+		void GetGroupBlackListFromServerByID (string aGroupId, [NullAllowed] Action<NSArray, EMError> aCompletionBlock);
 
 		// @required -(EMGroup *)destroyGroup:(NSString *)aGroupId error:(EMError **)pError __attribute__((deprecated("")));
 		[Abstract]
-		[Export ("destroyGroup:error:")]
+		[NullAllowed, Export ("destroyGroup:error:")]
 		EMGroup DestroyGroup (string aGroupId, out EMError pError);
 
 		// @required -(void)destroyGroup:(NSString *)aGroupId completion:(void (^)(EMGroup *, EMError *))aCompletionBlock __attribute__((deprecated("")));
 		[Abstract]
 		[Export ("destroyGroup:completion:")]
-		void DestroyGroup (string aGroupId, Action<EMGroup, EMError> aCompletionBlock);
+		void DestroyGroup (string aGroupId, [NullAllowed] Action<EMGroup, EMError> aCompletionBlock);
 
 		// @required -(void)addDelegate:(id<EMGroupManagerDelegate>)aDelegate __attribute__((deprecated("")));
 		[Abstract]
@@ -1901,31 +1901,31 @@ namespace Hyphenate.iOS.Lib
 
 		// @required -(NSArray *)getAllGroups __attribute__((deprecated("Use -getJoinedGroups")));
 		[Abstract]
-		[Export ("getAllGroups")]
+		[NullAllowed, Export ("getAllGroups")]
 		//[Verify (MethodToProperty), Verify (StronglyTypedNSArray)]
 		NSObject[] AllGroups { get; }
 
 		// @required -(NSArray *)loadAllMyGroupsFromDB __attribute__((deprecated("Use -getJoinedGroups")));
 		[Abstract]
-		[Export ("loadAllMyGroupsFromDB")]
+		[NullAllowed, Export ("loadAllMyGroupsFromDB")]
 		//[Verify (MethodToProperty), Verify (StronglyTypedNSArray)]
 		NSObject[] LoadAllMyGroupsFromDB { get; }
 
 		// @required -(NSArray *)getAllIgnoredGroupIds __attribute__((deprecated("Use -getGroupsWithoutPushNotification")));
 		[Abstract]
-		[Export ("getAllIgnoredGroupIds")]
+		[NullAllowed, Export ("getAllIgnoredGroupIds")]
 		//[Verify (MethodToProperty), Verify (StronglyTypedNSArray)]
 		NSObject[] AllIgnoredGroupIds { get; }
 
 		// @required -(void)asyncGetMyGroupsFromServer:(void (^)(NSArray *))aSuccessBlock failure:(void (^)(EMError *))aFailureBlock __attribute__((deprecated("Use -getJoinedGroupsFromServerWithCompletion:")));
 		[Abstract]
 		[Export ("asyncGetMyGroupsFromServer:failure:")]
-		void AsyncGetMyGroupsFromServer (Action<NSArray> aSuccessBlock, Action<EMError> aFailureBlock);
+		void AsyncGetMyGroupsFromServer (Action<NSArray> aSuccessBlock, [NullAllowed] Action<EMError> aFailureBlock);
 
 		// @required -(void)asyncGetPublicGroupsFromServerWithCursor:(NSString *)aCursor pageSize:(NSInteger)aPageSize success:(void (^)(EMCursorResult *))aSuccessBlock failure:(void (^)(EMError *))aFailureBlock __attribute__((deprecated("Use -getPublicGroupsFromServerWithCursor:pageSize:completion:")));
 		[Abstract]
 		[Export ("asyncGetPublicGroupsFromServerWithCursor:pageSize:success:failure:")]
-		void AsyncGetPublicGroupsFromServerWithCursor (string aCursor, nint aPageSize, Action<EMCursorResult> aSuccessBlock, Action<EMError> aFailureBlock);
+		void AsyncGetPublicGroupsFromServerWithCursor (string aCursor, nint aPageSize, [NullAllowed] Action<EMCursorResult> aSuccessBlock, [NullAllowed] Action<EMError> aFailureBlock);
 
 		// @required -(void)asyncSearchPublicGroupWithId:(NSString *)aGroundId success:(void (^)(EMGroup *))aSuccessBlock failure:(void (^)(EMError *))aFailureBlock __attribute__((deprecated("Use -searchPublicGroupWithId:completion:")));
 		[Abstract]
@@ -1936,106 +1936,106 @@ namespace Hyphenate.iOS.Lib
 		[Abstract]
 		[Export ("asyncCreateGroupWithSubject:description:invitees:message:setting:success:failure:")]
 		//[Verify (StronglyTypedNSArray)]
-		void AsyncCreateGroupWithSubject (string aSubject, string aDescription, NSObject[] aInvitees, string aMessage, EMGroupOptions aSetting, Action<EMGroup> aSuccessBlock, Action<EMError> aFailureBlock);
+		void AsyncCreateGroupWithSubject (string aSubject, string aDescription, NSObject[] aInvitees, string aMessage, EMGroupOptions aSetting, [NullAllowed] Action<EMGroup> aSuccessBlock, [NullAllowed] Action<EMError> aFailureBlock);
 
 		// @required -(void)asyncFetchGroupInfo:(NSString *)aGroupId includeMembersList:(BOOL)aIncludeMembersList success:(void (^)(EMGroup *))aSuccessBlock failure:(void (^)(EMError *))aFailureBlock __attribute__((deprecated("Use -getGroupSpecificationFromServerByID:includeMembersList:completion:")));
 		[Abstract]
 		[Export ("asyncFetchGroupInfo:includeMembersList:success:failure:")]
-		void AsyncFetchGroupInfo (string aGroupId, bool aIncludeMembersList, Action<EMGroup> aSuccessBlock, Action<EMError> aFailureBlock);
+		void AsyncFetchGroupInfo (string aGroupId, bool aIncludeMembersList, [NullAllowed] Action<EMGroup> aSuccessBlock, [NullAllowed] Action<EMError> aFailureBlock);
 
 		// @required -(void)asyncFetchGroupBansList:(NSString *)aGroupId success:(void (^)(NSArray *))aSuccessBlock failure:(void (^)(EMError *))aFailureBlock __attribute__((deprecated("Use -getGroupBlackListFromServerByID:completion:")));
 		[Abstract]
 		[Export ("asyncFetchGroupBansList:success:failure:")]
-		void AsyncFetchGroupBansList (string aGroupId, Action<NSArray> aSuccessBlock, Action<EMError> aFailureBlock);
+		void AsyncFetchGroupBansList (string aGroupId, [NullAllowed] Action<NSArray> aSuccessBlock, [NullAllowed] Action<EMError> aFailureBlock);
 
 		// @required -(void)asyncAddOccupants:(NSArray *)aOccupants toGroup:(NSString *)aGroupId welcomeMessage:(NSString *)aWelcomeMessage success:(void (^)(EMGroup *))aSuccessBlock failure:(void (^)(EMError *))aFailureBlock __attribute__((deprecated("Use -addMembers:toGroup:message:completion:")));
 		[Abstract]
 		[Export ("asyncAddOccupants:toGroup:welcomeMessage:success:failure:")]
 		//[Verify (StronglyTypedNSArray)]
-		void AsyncAddOccupants (NSObject[] aOccupants, string aGroupId, string aWelcomeMessage, Action<EMGroup> aSuccessBlock, Action<EMError> aFailureBlock);
+		void AsyncAddOccupants (NSObject[] aOccupants, string aGroupId, string aWelcomeMessage, [NullAllowed] Action<EMGroup> aSuccessBlock, [NullAllowed] Action<EMError> aFailureBlock);
 
 		// @required -(void)asyncRemoveOccupants:(NSArray *)aOccupants fromGroup:(NSString *)aGroupId success:(void (^)(EMGroup *))aSuccessBlock failure:(void (^)(EMError *))aFailureBlock __attribute__((deprecated("Use -removeMembers:fromGroup:completion:")));
 		[Abstract]
 		[Export ("asyncRemoveOccupants:fromGroup:success:failure:")]
 		//[Verify (StronglyTypedNSArray)]
-		void AsyncRemoveOccupants (NSObject[] aOccupants, string aGroupId, Action<EMGroup> aSuccessBlock, Action<EMError> aFailureBlock);
+		void AsyncRemoveOccupants (NSObject[] aOccupants, string aGroupId, [NullAllowed] Action<EMGroup> aSuccessBlock, [NullAllowed] Action<EMError> aFailureBlock);
 
 		// @required -(void)asyncBlockOccupants:(NSArray *)aOccupants fromGroup:(NSString *)aGroupId success:(void (^)(EMGroup *))aSuccessBlock failure:(void (^)(EMError *))aFailureBlock __attribute__((deprecated("Use -blockMembers:fromGroup:completion:")));
 		[Abstract]
 		[Export ("asyncBlockOccupants:fromGroup:success:failure:")]
 		//[Verify (StronglyTypedNSArray)]
-		void AsyncBlockOccupants (NSObject[] aOccupants, string aGroupId, Action<EMGroup> aSuccessBlock, Action<EMError> aFailureBlock);
+		void AsyncBlockOccupants (NSObject[] aOccupants, string aGroupId, [NullAllowed] Action<EMGroup> aSuccessBlock, [NullAllowed] Action<EMError> aFailureBlock);
 
 		// @required -(void)asyncUnblockOccupants:(NSArray *)aOccupants forGroup:(NSString *)aGroupId success:(void (^)(EMGroup *))aSuccessBlock failure:(void (^)(EMError *))aFailureBlock __attribute__((deprecated("Use -unblockMembers:fromGroup:completion:")));
 		[Abstract]
 		[Export ("asyncUnblockOccupants:forGroup:success:failure:")]
 		//[Verify (StronglyTypedNSArray)]
-		void AsyncUnblockOccupants (NSObject[] aOccupants, string aGroupId, Action<EMGroup> aSuccessBlock, Action<EMError> aFailureBlock);
+		void AsyncUnblockOccupants (NSObject[] aOccupants, string aGroupId, [NullAllowed] Action<EMGroup> aSuccessBlock, [NullAllowed] Action<EMError> aFailureBlock);
 
 		// @required -(void)asyncChangeGroupSubject:(NSString *)aSubject forGroup:(NSString *)aGroupId success:(void (^)(EMGroup *))aSuccessBlock failure:(void (^)(EMError *))aFailureBlock __attribute__((deprecated("Use -updateGroupSubject:forGroup:completion")));
 		[Abstract]
 		[Export ("asyncChangeGroupSubject:forGroup:success:failure:")]
-		void AsyncChangeGroupSubject (string aSubject, string aGroupId, Action<EMGroup> aSuccessBlock, Action<EMError> aFailureBlock);
+		void AsyncChangeGroupSubject (string aSubject, string aGroupId, [NullAllowed] Action<EMGroup> aSuccessBlock, [NullAllowed] Action<EMError> aFailureBlock);
 
 		// @required -(void)asyncChangeDescription:(NSString *)aDescription forGroup:(NSString *)aGroupId success:(void (^)(EMGroup *))aSuccessBlock failure:(void (^)(EMError *))aFailureBlock __attribute__((deprecated("Use -updateDescription:forGroup:completion")));
 		[Abstract]
 		[Export ("asyncChangeDescription:forGroup:success:failure:")]
-		void AsyncChangeDescription (string aDescription, string aGroupId, Action<EMGroup> aSuccessBlock, Action<EMError> aFailureBlock);
+		void AsyncChangeDescription (string aDescription, string aGroupId, [NullAllowed] Action<EMGroup> aSuccessBlock, [NullAllowed] Action<EMError> aFailureBlock);
 
 		// @required -(void)asyncLeaveGroup:(NSString *)aGroupId success:(void (^)(EMGroup *))aSuccessBlock failure:(void (^)(EMError *))aFailureBlock __attribute__((deprecated("Use -leaveGroup:completion")));
 		[Abstract]
 		[Export ("asyncLeaveGroup:success:failure:")]
-		void AsyncLeaveGroup (string aGroupId, Action<EMGroup> aSuccessBlock, Action<EMError> aFailureBlock);
+		void AsyncLeaveGroup (string aGroupId, [NullAllowed] Action<EMGroup> aSuccessBlock, [NullAllowed] Action<EMError> aFailureBlock);
 
 		// @required -(void)asyncDestroyGroup:(NSString *)aGroupId success:(void (^)(EMGroup *))aSuccessBlock failure:(void (^)(EMError *))aFailureBlock __attribute__((deprecated("Use -destroyGroup:completion")));
 		[Abstract]
 		[Export ("asyncDestroyGroup:success:failure:")]
-		void AsyncDestroyGroup (string aGroupId, Action<EMGroup> aSuccessBlock, Action<EMError> aFailureBlock);
+		void AsyncDestroyGroup (string aGroupId, [NullAllowed] Action<EMGroup> aSuccessBlock, [NullAllowed] Action<EMError> aFailureBlock);
 
 		// @required -(void)asyncBlockGroup:(NSString *)aGroupId success:(void (^)(EMGroup *))aSuccessBlock failure:(void (^)(EMError *))aFailureBlock __attribute__((deprecated("Use -blockGroup:completion:")));
 		[Abstract]
 		[Export ("asyncBlockGroup:success:failure:")]
-		void AsyncBlockGroup (string aGroupId, Action<EMGroup> aSuccessBlock, Action<EMError> aFailureBlock);
+		void AsyncBlockGroup (string aGroupId, [NullAllowed] Action<EMGroup> aSuccessBlock, [NullAllowed] Action<EMError> aFailureBlock);
 
 		// @required -(void)asyncUnblockGroup:(NSString *)aGroupId success:(void (^)(EMGroup *))aSuccessBlock failure:(void (^)(EMError *))aFailureBlock __attribute__((deprecated("Use -unblockGroup:completion")));
 		[Abstract]
 		[Export ("asyncUnblockGroup:success:failure:")]
-		void AsyncUnblockGroup (string aGroupId, Action<EMGroup> aSuccessBlock, Action<EMError> aFailureBlock);
+		void AsyncUnblockGroup (string aGroupId, [NullAllowed] Action<EMGroup> aSuccessBlock, [NullAllowed] Action<EMError> aFailureBlock);
 
 		// @required -(void)asyncJoinPublicGroup:(NSString *)aGroupId success:(void (^)(EMGroup *))aSuccessBlock failure:(void (^)(EMError *))aFailureBlock __attribute__((deprecated("Use -joinPublicGroup:completion")));
 		[Abstract]
 		[Export ("asyncJoinPublicGroup:success:failure:")]
-		void AsyncJoinPublicGroup (string aGroupId, Action<EMGroup> aSuccessBlock, Action<EMError> aFailureBlock);
+		void AsyncJoinPublicGroup (string aGroupId, [NullAllowed] Action<EMGroup> aSuccessBlock, [NullAllowed] Action<EMError> aFailureBlock);
 
 		// @required -(void)asyncApplyJoinPublicGroup:(NSString *)aGroupId message:(NSString *)aMessage success:(void (^)(EMGroup *))aSuccessBlock failure:(void (^)(EMError *))aFailureBlock __attribute__((deprecated("Use -requestToJoinPublicGroup:message:completion:")));
 		[Abstract]
 		[Export ("asyncApplyJoinPublicGroup:message:success:failure:")]
-		void AsyncApplyJoinPublicGroup (string aGroupId, string aMessage, Action<EMGroup> aSuccessBlock, Action<EMError> aFailureBlock);
+		void AsyncApplyJoinPublicGroup (string aGroupId, string aMessage, [NullAllowed] Action<EMGroup> aSuccessBlock, [NullAllowed] Action<EMError> aFailureBlock);
 
 		// @required -(void)asyncAcceptJoinApplication:(NSString *)aGroupId applicant:(NSString *)aUsername success:(void (^)())aSuccessBlock failure:(void (^)(EMError *))aFailureBlock __attribute__((deprecated("Use -approveJoinGroupRequest:sender:completion:")));
 		[Abstract]
 		[Export ("asyncAcceptJoinApplication:applicant:success:failure:")]
-		void AsyncAcceptJoinApplication (string aGroupId, string aUsername, Action aSuccessBlock, Action<EMError> aFailureBlock);
+		void AsyncAcceptJoinApplication (string aGroupId, string aUsername, [NullAllowed] Action aSuccessBlock, [NullAllowed] Action<EMError> aFailureBlock);
 
 		// @required -(void)asyncDeclineJoinApplication:(NSString *)aGroupId applicant:(NSString *)aUsername reason:(NSString *)aReason success:(void (^)())aSuccessBlock failure:(void (^)(EMError *))aFailureBlock __attribute__((deprecated("Use -declineJoinGroupRequest:sender:reason:completion:")));
 		[Abstract]
 		[Export ("asyncDeclineJoinApplication:applicant:reason:success:failure:")]
-		void AsyncDeclineJoinApplication (string aGroupId, string aUsername, string aReason, Action aSuccessBlock, Action<EMError> aFailureBlock);
+		void AsyncDeclineJoinApplication (string aGroupId, string aUsername, string aReason, [NullAllowed] Action aSuccessBlock, [NullAllowed] Action<EMError> aFailureBlock);
 
 		// @required -(void)asyncAcceptInvitationFromGroup:(NSString *)aGroupId inviter:(NSString *)aUsername success:(void (^)(EMGroup *))aSuccessBlock failure:(void (^)(EMError *))aFailureBlock __attribute__((deprecated("Use -acceptInvitationFromGroup:inviter:completion")));
 		[Abstract]
 		[Export ("asyncAcceptInvitationFromGroup:inviter:success:failure:")]
-		void AsyncAcceptInvitationFromGroup (string aGroupId, string aUsername, Action<EMGroup> aSuccessBlock, Action<EMError> aFailureBlock);
+		void AsyncAcceptInvitationFromGroup (string aGroupId, string aUsername, [NullAllowed] Action<EMGroup> aSuccessBlock, [NullAllowed] Action<EMError> aFailureBlock);
 
 		// @required -(void)asyncDeclineInvitationFromGroup:(NSString *)aGroupId inviter:(NSString *)aUsername reason:(NSString *)aReason success:(void (^)())aSuccessBlock failure:(void (^)(EMError *))aFailureBlock __attribute__((deprecated("Use -declineGroupInvitation:inviter:reason:completion:")));
 		[Abstract]
 		[Export ("asyncDeclineInvitationFromGroup:inviter:reason:success:failure:")]
-		void AsyncDeclineInvitationFromGroup (string aGroupId, string aUsername, string aReason, Action aSuccessBlock, Action<EMError> aFailureBlock);
+		void AsyncDeclineInvitationFromGroup (string aGroupId, string aUsername, string aReason, [NullAllowed] Action aSuccessBlock, [NullAllowed] Action<EMError> aFailureBlock);
 
 		// @required -(void)asyncIgnoreGroupPush:(NSString *)aGroupId ignore:(BOOL)aIsIgnore success:(void (^)())aSuccessBlock failure:(void (^)(EMError *))aFailureBlock __attribute__((deprecated("Use -updatePushServiceForGroup:isPushEnabled:completion:")));
 		[Abstract]
 		[Export ("asyncIgnoreGroupPush:ignore:success:failure:")]
-		void AsyncIgnoreGroupPush (string aGroupId, bool aIsIgnore, Action aSuccessBlock, Action<EMError> aFailureBlock);
+		void AsyncIgnoreGroupPush (string aGroupId, bool aIsIgnore, [NullAllowed] Action aSuccessBlock, [NullAllowed] Action<EMError> aFailureBlock);
 	}
 
     partial interface IEMChatroomManagerDelegate {}
@@ -2110,42 +2110,42 @@ namespace Hyphenate.iOS.Lib
 	interface EMChatroom
 	{
 		// @property (readonly, copy, nonatomic) NSString * chatroomId;
-		[Export ("chatroomId")]
+		[NullAllowed, Export ("chatroomId")]
 		string ChatroomId { get; }
 
 		// @property (readonly, copy, nonatomic) NSString * subject;
-		[Export ("subject")]
+		[NullAllowed, Export ("subject")]
 		string Subject { get; }
 
 		// @property (readonly, copy, nonatomic) NSString * description;
-		[Export ("description")]
+		[NullAllowed, Export ("description")]
 		string RoomDescription { get; }
 
 		// @property (readonly, copy, nonatomic) NSString * owner;
-		[Export ("owner")]
+		[NullAllowed, Export ("owner")]
 		string Owner { get; }
 
 		// @property (readonly, copy, nonatomic) NSString * announcement;
-		[Export ("announcement")]
+		[NullAllowed, Export ("announcement")]
 		string Announcement { get; }
 
 		// @property (readonly, copy, nonatomic) NSArray * adminList;
-		[Export ("adminList", ArgumentSemantic.Copy)]
+		[NullAllowed, Export ("adminList", ArgumentSemantic.Copy)]
 		//[Verify (StronglyTypedNSArray)]
 		NSObject[] AdminList { get; }
 
 		// @property (readonly, copy, nonatomic) NSArray * memberList;
-		[Export ("memberList", ArgumentSemantic.Copy)]
+		[NullAllowed, Export ("memberList", ArgumentSemantic.Copy)]
 		//[Verify (StronglyTypedNSArray)]
 		NSObject[] MemberList { get; }
 
 		// @property (readonly, nonatomic, strong) NSArray * blacklist;
-		[Export ("blacklist", ArgumentSemantic.Strong)]
+		[NullAllowed, Export ("blacklist", ArgumentSemantic.Strong)]
 		//[Verify (StronglyTypedNSArray)]
 		NSObject[] Blacklist { get; }
 
 		// @property (readonly, nonatomic, strong) NSArray * muteList;
-		[Export ("muteList", ArgumentSemantic.Strong)]
+		[NullAllowed, Export ("muteList", ArgumentSemantic.Strong)]
 		//[Verify (StronglyTypedNSArray)]
 		NSObject[] MuteList { get; }
 
@@ -2167,7 +2167,7 @@ namespace Hyphenate.iOS.Lib
 		EMChatroom ChatroomWithId (string aChatroomId);
 
 		// @property (readonly, copy, nonatomic) NSArray * members __attribute__((deprecated("")));
-		[Export ("members", ArgumentSemantic.Copy)]
+		[NullAllowed, Export ("members", ArgumentSemantic.Copy)]
 		//[Verify (StronglyTypedNSArray)]
 		NSObject[] Members { get; }
 
@@ -2180,7 +2180,7 @@ namespace Hyphenate.iOS.Lib
 		nint MaxMembersCount { get; }
 
 		// @property (readonly, copy, nonatomic) NSArray * occupants __attribute__((deprecated("Use - members")));
-		[Export ("occupants", ArgumentSemantic.Copy)]
+		[NullAllowed, Export ("occupants", ArgumentSemantic.Copy)]
 		//[Verify (StronglyTypedNSArray)]
 		NSObject[] Occupants { get; }
 	}
@@ -2190,7 +2190,7 @@ namespace Hyphenate.iOS.Lib
 	interface EMPageResult
 	{
 		// @property (nonatomic, strong) NSArray * list;
-		[Export ("list", ArgumentSemantic.Strong)]
+		[NullAllowed, Export ("list", ArgumentSemantic.Strong)]
 		//[Verify (StronglyTypedNSArray)]
 		NSObject[] List { get; set; }
 
@@ -2224,17 +2224,17 @@ namespace Hyphenate.iOS.Lib
 
 		// @required -(EMPageResult *)getChatroomsFromServerWithPage:(NSInteger)aPageNum pageSize:(NSInteger)aPageSize error:(EMError **)pError;
 		[Abstract]
-		[Export ("getChatroomsFromServerWithPage:pageSize:error:")]
+		[NullAllowed, Export ("getChatroomsFromServerWithPage:pageSize:error:")]
 		EMPageResult GetChatroomsFromServerWithPage (nint aPageNum, nint aPageSize, out EMError pError);
 
 		// @required -(void)getChatroomsFromServerWithPage:(NSInteger)aPageNum pageSize:(NSInteger)aPageSize completion:(void (^)(EMPageResult *, EMError *))aCompletionBlock;
 		[Abstract]
 		[Export ("getChatroomsFromServerWithPage:pageSize:completion:")]
-		void GetChatroomsFromServerWithPage (nint aPageNum, nint aPageSize, Action<EMPageResult, EMError> aCompletionBlock);
+		void GetChatroomsFromServerWithPage (nint aPageNum, nint aPageSize, [NullAllowed] Action<EMPageResult, EMError> aCompletionBlock);
 
 		// @required -(EMChatroom *)createChatroomWithSubject:(NSString *)aSubject description:(NSString *)aDescription invitees:(NSArray *)aInvitees message:(NSString *)aMessage maxMembersCount:(NSInteger)aMaxMembersCount error:(EMError **)pError;
 		[Abstract]
-		[Export ("createChatroomWithSubject:description:invitees:message:maxMembersCount:error:")]
+		[NullAllowed, Export ("createChatroomWithSubject:description:invitees:message:maxMembersCount:error:")]
 		//[Verify (StronglyTypedNSArray)]
 		EMChatroom CreateChatroomWithSubject (string aSubject, string aDescription, NSObject[] aInvitees, string aMessage, nint aMaxMembersCount, out EMError pError);
 
@@ -2242,17 +2242,17 @@ namespace Hyphenate.iOS.Lib
 		[Abstract]
 		[Export ("createChatroomWithSubject:description:invitees:message:maxMembersCount:completion:")]
 		//[Verify (StronglyTypedNSArray)]
-		void CreateChatroomWithSubject (string aSubject, string aDescription, NSObject[] aInvitees, string aMessage, nint aMaxMembersCount, Action<EMChatroom, EMError> aCompletionBlock);
+		void CreateChatroomWithSubject (string aSubject, string aDescription, NSObject[] aInvitees, string aMessage, nint aMaxMembersCount, [NullAllowed] Action<EMChatroom, EMError> aCompletionBlock);
 
 		// @required -(EMChatroom *)joinChatroom:(NSString *)aChatroomId error:(EMError **)pError;
 		[Abstract]
-		[Export ("joinChatroom:error:")]
+		[NullAllowed, Export ("joinChatroom:error:")]
 		EMChatroom JoinChatroom (string aChatroomId, out EMError pError);
 
 		// @required -(void)joinChatroom:(NSString *)aChatroomId completion:(void (^)(EMChatroom *, EMError *))aCompletionBlock;
 		[Abstract]
 		[Export ("joinChatroom:completion:")]
-		void JoinChatroom (string aChatroomId, Action<EMChatroom, EMError> aCompletionBlock);
+		void JoinChatroom (string aChatroomId, [NullAllowed] Action<EMChatroom, EMError> aCompletionBlock);
 
 		// @required -(void)leaveChatroom:(NSString *)aChatroomId error:(EMError **)pError;
 		[Abstract]
@@ -2262,93 +2262,93 @@ namespace Hyphenate.iOS.Lib
 		// @required -(void)leaveChatroom:(NSString *)aChatroomId completion:(void (^)(EMError *))aCompletionBlock;
 		[Abstract]
 		[Export ("leaveChatroom:completion:")]
-		void LeaveChatroom (string aChatroomId, Action<EMError> aCompletionBlock);
+		void LeaveChatroom (string aChatroomId, [NullAllowed] Action<EMError> aCompletionBlock);
 
 		// @required -(EMError *)destroyChatroom:(NSString *)aChatroomId;
 		[Abstract]
-		[Export ("destroyChatroom:")]
+		[NullAllowed, Export ("destroyChatroom:")]
 		EMError DestroyChatroom (string aChatroomId);
 
 		// @required -(void)destroyChatroom:(NSString *)aChatroomId completion:(void (^)(EMError *))aCompletionBlock;
 		[Abstract]
 		[Export ("destroyChatroom:completion:")]
-		void DestroyChatroom (string aChatroomId, Action<EMError> aCompletionBlock);
+		void DestroyChatroom (string aChatroomId, [NullAllowed] Action<EMError> aCompletionBlock);
 
 		// @required -(EMChatroom *)getChatroomSpecificationFromServerWithId:(NSString *)aChatroomId error:(EMError **)pError;
 		[Abstract]
-		[Export ("getChatroomSpecificationFromServerWithId:error:")]
+		[NullAllowed, Export ("getChatroomSpecificationFromServerWithId:error:")]
 		EMChatroom GetChatroomSpecificationFromServerWithId (string aChatroomId, out EMError pError);
 
 		// @required -(void)getChatroomSpecificationFromServerWithId:(NSString *)aChatroomId completion:(void (^)(EMChatroom *, EMError *))aCompletionBlock;
 		[Abstract]
 		[Export ("getChatroomSpecificationFromServerWithId:completion:")]
-		void GetChatroomSpecificationFromServerWithId (string aChatroomId, Action<EMChatroom, EMError> aCompletionBlock);
+		void GetChatroomSpecificationFromServerWithId (string aChatroomId, [NullAllowed] Action<EMChatroom, EMError> aCompletionBlock);
 
 		// @required -(EMCursorResult *)getChatroomMemberListFromServerWithId:(NSString *)aChatroomId cursor:(NSString *)aCursor pageSize:(NSInteger)aPageSize error:(EMError **)pError;
 		[Abstract]
-		[Export ("getChatroomMemberListFromServerWithId:cursor:pageSize:error:")]
+		[NullAllowed, Export ("getChatroomMemberListFromServerWithId:cursor:pageSize:error:")]
 		EMCursorResult GetChatroomMemberListFromServerWithId (string aChatroomId, string aCursor, nint aPageSize, out EMError pError);
 
 		// @required -(void)getChatroomMemberListFromServerWithId:(NSString *)aChatroomId cursor:(NSString *)aCursor pageSize:(NSInteger)aPageSize completion:(void (^)(EMCursorResult *, EMError *))aCompletionBlock;
 		[Abstract]
 		[Export ("getChatroomMemberListFromServerWithId:cursor:pageSize:completion:")]
-		void GetChatroomMemberListFromServerWithId (string aChatroomId, string aCursor, nint aPageSize, Action<EMCursorResult, EMError> aCompletionBlock);
+		void GetChatroomMemberListFromServerWithId (string aChatroomId, string aCursor, nint aPageSize, [NullAllowed] Action<EMCursorResult, EMError> aCompletionBlock);
 
 		// @required -(NSArray *)getChatroomBlacklistFromServerWithId:(NSString *)aChatroomId pageNumber:(NSInteger)aPageNum pageSize:(NSInteger)aPageSize error:(EMError **)pError;
 		[Abstract]
-		[Export ("getChatroomBlacklistFromServerWithId:pageNumber:pageSize:error:")]
+		[NullAllowed, Export ("getChatroomBlacklistFromServerWithId:pageNumber:pageSize:error:")]
 		//[Verify (StronglyTypedNSArray)]
 		NSObject[] GetChatroomBlacklistFromServerWithId (string aChatroomId, nint aPageNum, nint aPageSize, out EMError pError);
 
 		// @required -(void)getChatroomBlacklistFromServerWithId:(NSString *)aChatroomId pageNumber:(NSInteger)aPageNum pageSize:(NSInteger)aPageSize completion:(void (^)(NSArray *, EMError *))aCompletionBlock;
 		[Abstract]
 		[Export ("getChatroomBlacklistFromServerWithId:pageNumber:pageSize:completion:")]
-		void GetChatroomBlacklistFromServerWithId (string aChatroomId, nint aPageNum, nint aPageSize, Action<NSArray, EMError> aCompletionBlock);
+		void GetChatroomBlacklistFromServerWithId (string aChatroomId, nint aPageNum, nint aPageSize, [NullAllowed] Action<NSArray, EMError> aCompletionBlock);
 
 		// @required -(NSArray *)getChatroomMuteListFromServerWithId:(NSString *)aChatroomId pageNumber:(NSInteger)aPageNum pageSize:(NSInteger)aPageSize error:(EMError **)pError;
 		[Abstract]
-		[Export ("getChatroomMuteListFromServerWithId:pageNumber:pageSize:error:")]
+		[NullAllowed, Export ("getChatroomMuteListFromServerWithId:pageNumber:pageSize:error:")]
 		//[Verify (StronglyTypedNSArray)]
 		NSObject[] GetChatroomMuteListFromServerWithId (string aChatroomId, nint aPageNum, nint aPageSize, out EMError pError);
 
 		// @required -(void)getChatroomMuteListFromServerWithId:(NSString *)aChatroomId pageNumber:(NSInteger)aPageNum pageSize:(NSInteger)aPageSize completion:(void (^)(NSArray *, EMError *))aCompletionBlock;
 		[Abstract]
 		[Export ("getChatroomMuteListFromServerWithId:pageNumber:pageSize:completion:")]
-		void GetChatroomMuteListFromServerWithId (string aChatroomId, nint aPageNum, nint aPageSize, Action<NSArray, EMError> aCompletionBlock);
+		void GetChatroomMuteListFromServerWithId (string aChatroomId, nint aPageNum, nint aPageSize, [NullAllowed] Action<NSArray, EMError> aCompletionBlock);
 
 		// @required -(NSString *)getChatroomAnnouncementWithId:(NSString *)aChatroomId error:(EMError **)pError;
 		[Abstract]
-		[Export ("getChatroomAnnouncementWithId:error:")]
+		[NullAllowed, Export ("getChatroomAnnouncementWithId:error:")]
 		string GetChatroomAnnouncementWithId (string aChatroomId, out EMError pError);
 
 		// @required -(void)getChatroomAnnouncementWithId:(NSString *)aChatroomId completion:(void (^)(NSString *, EMError *))aCompletionBlock;
 		[Abstract]
 		[Export ("getChatroomAnnouncementWithId:completion:")]
-		void GetChatroomAnnouncementWithId (string aChatroomId, Action<NSString, EMError> aCompletionBlock);
+		void GetChatroomAnnouncementWithId (string aChatroomId, [NullAllowed] Action<NSString, EMError> aCompletionBlock);
 
 		// @required -(EMChatroom *)updateSubject:(NSString *)aSubject forChatroom:(NSString *)aChatroomId error:(EMError **)pError;
 		[Abstract]
-		[Export ("updateSubject:forChatroom:error:")]
+		[NullAllowed, Export ("updateSubject:forChatroom:error:")]
 		EMChatroom UpdateSubject (string aSubject, string aChatroomId, out EMError pError);
 
 		// @required -(void)updateSubject:(NSString *)aSubject forChatroom:(NSString *)aChatroomId completion:(void (^)(EMChatroom *, EMError *))aCompletionBlock;
 		[Abstract]
 		[Export ("updateSubject:forChatroom:completion:")]
-		void UpdateSubject (string aSubject, string aChatroomId, Action<EMChatroom, EMError> aCompletionBlock);
+		void UpdateSubject (string aSubject, string aChatroomId, [NullAllowed] Action<EMChatroom, EMError> aCompletionBlock);
 
 		// @required -(EMChatroom *)updateDescription:(NSString *)aDescription forChatroom:(NSString *)aChatroomId error:(EMError **)pError;
 		[Abstract]
-		[Export ("updateDescription:forChatroom:error:")]
+		[NullAllowed, Export ("updateDescription:forChatroom:error:")]
 		EMChatroom UpdateDescription (string aDescription, string aChatroomId, out EMError pError);
 
 		// @required -(void)updateDescription:(NSString *)aDescription forChatroom:(NSString *)aChatroomId completion:(void (^)(EMChatroom *, EMError *))aCompletionBlock;
 		[Abstract]
 		[Export ("updateDescription:forChatroom:completion:")]
-		void UpdateDescription (string aDescription, string aChatroomId, Action<EMChatroom, EMError> aCompletionBlock);
+		void UpdateDescription (string aDescription, string aChatroomId, [NullAllowed] Action<EMChatroom, EMError> aCompletionBlock);
 
 		// @required -(EMChatroom *)removeMembers:(NSArray *)aMembers fromChatroom:(NSString *)aChatroomId error:(EMError **)pError;
 		[Abstract]
-		[Export ("removeMembers:fromChatroom:error:")]
+		[NullAllowed, Export ("removeMembers:fromChatroom:error:")]
 		//[Verify (StronglyTypedNSArray)]
 		EMChatroom RemoveMembers (NSObject[] aMembers, string aChatroomId, out EMError pError);
 
@@ -2356,11 +2356,11 @@ namespace Hyphenate.iOS.Lib
 		[Abstract]
 		[Export ("removeMembers:fromChatroom:completion:")]
 		//[Verify (StronglyTypedNSArray)]
-		void RemoveMembers (NSObject[] aMembers, string aChatroomId, Action<EMChatroom, EMError> aCompletionBlock);
+		void RemoveMembers (NSObject[] aMembers, string aChatroomId, [NullAllowed] Action<EMChatroom, EMError> aCompletionBlock);
 
 		// @required -(EMChatroom *)blockMembers:(NSArray *)aMembers fromChatroom:(NSString *)aChatroomId error:(EMError **)pError;
 		[Abstract]
-		[Export ("blockMembers:fromChatroom:error:")]
+		[NullAllowed, Export ("blockMembers:fromChatroom:error:")]
 		//[Verify (StronglyTypedNSArray)]
 		EMChatroom BlockMembers (NSObject[] aMembers, string aChatroomId, out EMError pError);
 
@@ -2368,11 +2368,11 @@ namespace Hyphenate.iOS.Lib
 		[Abstract]
 		[Export ("blockMembers:fromChatroom:completion:")]
 		//[Verify (StronglyTypedNSArray)]
-		void BlockMembers (NSObject[] aMembers, string aChatroomId, Action<EMChatroom, EMError> aCompletionBlock);
+		void BlockMembers (NSObject[] aMembers, string aChatroomId, [NullAllowed] Action<EMChatroom, EMError> aCompletionBlock);
 
 		// @required -(EMChatroom *)unblockMembers:(NSArray *)aMembers fromChatroom:(NSString *)aChatroomId error:(EMError **)pError;
 		[Abstract]
-		[Export ("unblockMembers:fromChatroom:error:")]
+		[NullAllowed, Export ("unblockMembers:fromChatroom:error:")]
 		//[Verify (StronglyTypedNSArray)]
 		EMChatroom UnblockMembers (NSObject[] aMembers, string aChatroomId, out EMError pError);
 
@@ -2380,41 +2380,41 @@ namespace Hyphenate.iOS.Lib
 		[Abstract]
 		[Export ("unblockMembers:fromChatroom:completion:")]
 		//[Verify (StronglyTypedNSArray)]
-		void UnblockMembers (NSObject[] aMembers, string aChatroomId, Action<EMChatroom, EMError> aCompletionBlock);
+		void UnblockMembers (NSObject[] aMembers, string aChatroomId, [NullAllowed] Action<EMChatroom, EMError> aCompletionBlock);
 
 		// @required -(EMChatroom *)updateChatroomOwner:(NSString *)aChatroomId newOwner:(NSString *)aNewOwner error:(EMError **)pError;
 		[Abstract]
-		[Export ("updateChatroomOwner:newOwner:error:")]
+		[NullAllowed, Export ("updateChatroomOwner:newOwner:error:")]
 		EMChatroom UpdateChatroomOwner (string aChatroomId, string aNewOwner, out EMError pError);
 
 		// @required -(void)updateChatroomOwner:(NSString *)aChatroomId newOwner:(NSString *)aNewOwner completion:(void (^)(EMChatroom *, EMError *))aCompletionBlock;
 		[Abstract]
 		[Export ("updateChatroomOwner:newOwner:completion:")]
-		void UpdateChatroomOwner (string aChatroomId, string aNewOwner, Action<EMChatroom, EMError> aCompletionBlock);
+		void UpdateChatroomOwner (string aChatroomId, string aNewOwner, [NullAllowed] Action<EMChatroom, EMError> aCompletionBlock);
 
 		// @required -(EMChatroom *)addAdmin:(NSString *)aAdmin toChatroom:(NSString *)aChatroomId error:(EMError **)pError;
 		[Abstract]
-		[Export ("addAdmin:toChatroom:error:")]
+		[NullAllowed, Export ("addAdmin:toChatroom:error:")]
 		EMChatroom AddAdmin (string aAdmin, string aChatroomId, out EMError pError);
 
 		// @required -(void)addAdmin:(NSString *)aAdmin toChatroom:(NSString *)aChatroomId completion:(void (^)(EMChatroom *, EMError *))aCompletionBlock;
 		[Abstract]
 		[Export ("addAdmin:toChatroom:completion:")]
-		void AddAdmin (string aAdmin, string aChatroomId, Action<EMChatroom, EMError> aCompletionBlock);
+		void AddAdmin (string aAdmin, string aChatroomId, [NullAllowed] Action<EMChatroom, EMError> aCompletionBlock);
 
 		// @required -(EMChatroom *)removeAdmin:(NSString *)aAdmin fromChatroom:(NSString *)aChatroomId error:(EMError **)pError;
 		[Abstract]
-		[Export ("removeAdmin:fromChatroom:error:")]
+		[NullAllowed, Export ("removeAdmin:fromChatroom:error:")]
 		EMChatroom RemoveAdmin (string aAdmin, string aChatroomId, out EMError pError);
 
 		// @required -(void)removeAdmin:(NSString *)aAdmin fromChatroom:(NSString *)aChatroomId completion:(void (^)(EMChatroom *, EMError *))aCompletionBlock;
 		[Abstract]
 		[Export ("removeAdmin:fromChatroom:completion:")]
-		void RemoveAdmin (string aAdmin, string aChatroomId, Action<EMChatroom, EMError> aCompletionBlock);
+		void RemoveAdmin (string aAdmin, string aChatroomId, [NullAllowed] Action<EMChatroom, EMError> aCompletionBlock);
 
 		// @required -(EMChatroom *)muteMembers:(NSArray *)aMuteMembers muteMilliseconds:(NSInteger)aMuteMilliseconds fromChatroom:(NSString *)aChatroomId error:(EMError **)pError;
 		[Abstract]
-		[Export ("muteMembers:muteMilliseconds:fromChatroom:error:")]
+		[NullAllowed, Export ("muteMembers:muteMilliseconds:fromChatroom:error:")]
 		//[Verify (StronglyTypedNSArray)]
 		EMChatroom MuteMembers (NSObject[] aMuteMembers, nint aMuteMilliseconds, string aChatroomId, out EMError pError);
 
@@ -2422,11 +2422,11 @@ namespace Hyphenate.iOS.Lib
 		[Abstract]
 		[Export ("muteMembers:muteMilliseconds:fromChatroom:completion:")]
 		//[Verify (StronglyTypedNSArray)]
-		void MuteMembers (NSObject[] aMuteMembers, nint aMuteMilliseconds, string aChatroomId, Action<EMChatroom, EMError> aCompletionBlock);
+		void MuteMembers (NSObject[] aMuteMembers, nint aMuteMilliseconds, string aChatroomId, [NullAllowed] Action<EMChatroom, EMError> aCompletionBlock);
 
 		// @required -(EMChatroom *)unmuteMembers:(NSArray *)aMembers fromChatroom:(NSString *)aChatroomId error:(EMError **)pError;
 		[Abstract]
-		[Export ("unmuteMembers:fromChatroom:error:")]
+		[NullAllowed, Export ("unmuteMembers:fromChatroom:error:")]
 		//[Verify (StronglyTypedNSArray)]
 		EMChatroom UnmuteMembers (NSObject[] aMembers, string aChatroomId, out EMError pError);
 
@@ -2434,27 +2434,27 @@ namespace Hyphenate.iOS.Lib
 		[Abstract]
 		[Export ("unmuteMembers:fromChatroom:completion:")]
 		//[Verify (StronglyTypedNSArray)]
-		void UnmuteMembers (NSObject[] aMembers, string aChatroomId, Action<EMChatroom, EMError> aCompletionBlock);
+		void UnmuteMembers (NSObject[] aMembers, string aChatroomId, [NullAllowed] Action<EMChatroom, EMError> aCompletionBlock);
 
 		// @required -(EMChatroom *)updateChatroomAnnouncementWithId:(NSString *)aChatroomId announcement:(NSString *)aAnnouncement error:(EMError **)pError;
 		[Abstract]
-		[Export ("updateChatroomAnnouncementWithId:announcement:error:")]
+		[NullAllowed, Export ("updateChatroomAnnouncementWithId:announcement:error:")]
 		EMChatroom UpdateChatroomAnnouncementWithId (string aChatroomId, string aAnnouncement, out EMError pError);
 
 		// @required -(void)updateChatroomAnnouncementWithId:(NSString *)aChatroomId announcement:(NSString *)aAnnouncement completion:(void (^)(EMChatroom *, EMError *))aCompletionBlock;
 		[Abstract]
 		[Export ("updateChatroomAnnouncementWithId:announcement:completion:")]
-		void UpdateChatroomAnnouncementWithId (string aChatroomId, string aAnnouncement, Action<EMChatroom, EMError> aCompletionBlock);
+		void UpdateChatroomAnnouncementWithId (string aChatroomId, string aAnnouncement, [NullAllowed] Action<EMChatroom, EMError> aCompletionBlock);
 
 		// @required -(EMChatroom *)fetchChatroomInfo:(NSString *)aChatroomId includeMembersList:(BOOL)aIncludeMembersList error:(EMError **)pError __attribute__((deprecated("")));
 		[Abstract]
-		[Export ("fetchChatroomInfo:includeMembersList:error:")]
+		[NullAllowed, Export ("fetchChatroomInfo:includeMembersList:error:")]
 		EMChatroom FetchChatroomInfo (string aChatroomId, bool aIncludeMembersList, out EMError pError);
 
 		// @required -(void)getChatroomSpecificationFromServerByID:(NSString *)aChatroomId includeMembersList:(BOOL)aIncludeMembersList completion:(void (^)(EMChatroom *, EMError *))aCompletionBlock __attribute__((deprecated("")));
 		[Abstract]
 		[Export ("getChatroomSpecificationFromServerByID:includeMembersList:completion:")]
-		void GetChatroomSpecificationFromServerByID (string aChatroomId, bool aIncludeMembersList, Action<EMChatroom, EMError> aCompletionBlock);
+		void GetChatroomSpecificationFromServerByID (string aChatroomId, bool aIncludeMembersList, [NullAllowed] Action<EMChatroom, EMError> aCompletionBlock);
 
 		// @required -(void)addDelegate:(id<EMChatroomManagerDelegate>)aDelegate __attribute__((deprecated("")));
 		[Abstract]
@@ -2463,34 +2463,34 @@ namespace Hyphenate.iOS.Lib
 
 		// @required -(NSArray *)getAllChatroomsFromServerWithError:(EMError **)pError __attribute__((deprecated("Use -getChatroomsFromServerWithPage")));
 		[Abstract]
-		[Export ("getAllChatroomsFromServerWithError:")]
+		[NullAllowed, Export ("getAllChatroomsFromServerWithError:")]
 		//[Verify (StronglyTypedNSArray)]
 		NSObject[] GetAllChatroomsFromServerWithError (out EMError pError);
 
 		// @required -(void)getAllChatroomsFromServerWithCompletion:(void (^)(NSArray *, EMError *))aCompletionBlock __attribute__((deprecated("Use -getChatroomsFromServerWithPage")));
 		[Abstract]
 		[Export ("getAllChatroomsFromServerWithCompletion:")]
-		void GetAllChatroomsFromServerWithCompletion (Action<NSArray, EMError> aCompletionBlock);
+		void GetAllChatroomsFromServerWithCompletion ([NullAllowed] Action<NSArray, EMError> aCompletionBlock);
 
 		// @required -(void)asyncGetAllChatroomsFromServer:(void (^)(NSArray *))aSuccessBlock failure:(void (^)(EMError *))aFailureBlock __attribute__((deprecated("Use -getAllChatroomsFromServerWithCompletion:")));
 		[Abstract]
 		[Export ("asyncGetAllChatroomsFromServer:failure:")]
-		void AsyncGetAllChatroomsFromServer (Action<NSArray> aSuccessBlock, Action<EMError> aFailureBlock);
+		void AsyncGetAllChatroomsFromServer ([NullAllowed] Action<NSArray> aSuccessBlock, [NullAllowed] Action<EMError> aFailureBlock);
 
 		// @required -(void)asyncJoinChatroom:(NSString *)aChatroomId success:(void (^)(EMChatroom *))aSuccessBlock failure:(void (^)(EMError *))aFailureBlock __attribute__((deprecated("Use -joinChatroom:completion:")));
 		[Abstract]
 		[Export ("asyncJoinChatroom:success:failure:")]
-		void AsyncJoinChatroom (string aChatroomId, Action<EMChatroom> aSuccessBlock, Action<EMError> aFailureBlock);
+		void AsyncJoinChatroom (string aChatroomId, [NullAllowed] Action<EMChatroom> aSuccessBlock, [NullAllowed] Action<EMError> aFailureBlock);
 
 		// @required -(void)asyncLeaveChatroom:(NSString *)aChatroomId success:(void (^)(EMChatroom *))aSuccessBlock failure:(void (^)(EMError *))aFailureBlock __attribute__((deprecated("Use -leaveChatroom:completion:")));
 		[Abstract]
 		[Export ("asyncLeaveChatroom:success:failure:")]
-		void AsyncLeaveChatroom (string aChatroomId, Action<EMChatroom> aSuccessBlock, Action<EMError> aFailureBlock);
+		void AsyncLeaveChatroom (string aChatroomId, [NullAllowed] Action<EMChatroom> aSuccessBlock, [NullAllowed] Action<EMError> aFailureBlock);
 
 		// @required -(void)asyncFetchChatroomInfo:(NSString *)aChatroomId includeMembersList:(BOOL)aIncludeMembersList success:(void (^)(EMChatroom *))aSuccessBlock failure:(void (^)(EMError *))aFailureBlock __attribute__((deprecated("Use -getChatroomSpecificationFromServerByID:includeMembersList:completion:")));
 		[Abstract]
 		[Export ("asyncFetchChatroomInfo:includeMembersList:success:failure:")]
-		void AsyncFetchChatroomInfo (string aChatroomId, bool aIncludeMembersList, Action<EMChatroom> aSuccessBlock, Action<EMError> aFailureBlock);
+		void AsyncFetchChatroomInfo (string aChatroomId, bool aIncludeMembersList, [NullAllowed] Action<EMChatroom> aSuccessBlock, [NullAllowed] Action<EMError> aFailureBlock);
 	}
 
 	// @interface EMDeviceConfig : NSObject
@@ -2498,15 +2498,15 @@ namespace Hyphenate.iOS.Lib
 	interface EMDeviceConfig
 	{
 		// @property (readonly, nonatomic) NSString * resource;
-		[Export ("resource")]
+		[NullAllowed, Export ("resource")]
 		string Resource { get; }
 
 		// @property (readonly, nonatomic) NSString * deviceUUID;
-		[Export ("deviceUUID")]
+		[NullAllowed, Export ("deviceUUID")]
 		string DeviceUUID { get; }
 
 		// @property (readonly, nonatomic) NSString * deviceName;
-		[Export ("deviceName")]
+		[NullAllowed, Export ("deviceName")]
 		string DeviceName { get; }
 	}
 
@@ -2515,19 +2515,19 @@ namespace Hyphenate.iOS.Lib
 	partial interface EMClient
 	{
 		// @property (readonly, nonatomic, strong) NSString * version;
-		[Export ("version", ArgumentSemantic.Strong)]
+		[NullAllowed, Export ("version", ArgumentSemantic.Strong)]
 		string Version { get; }
 
 		// @property (readonly, nonatomic, strong) NSString * currentUsername;
-		[Export ("currentUsername", ArgumentSemantic.Strong)]
+		[NullAllowed, Export ("currentUsername", ArgumentSemantic.Strong)]
 		string CurrentUsername { get; }
 
 		// @property (readonly, nonatomic, strong) EMOptions * options;
-		[Export ("options", ArgumentSemantic.Strong)]
+		[NullAllowed, Export ("options", ArgumentSemantic.Strong)]
 		EMOptions Options { get; }
 
 		// @property (readonly, nonatomic, strong) EMPushOptions * pushOptions;
-		[Export ("pushOptions", ArgumentSemantic.Strong)]
+		[NullAllowed, Export ("pushOptions", ArgumentSemantic.Strong)]
 		EMPushOptions PushOptions { get; }
 
 		// @property (readonly, nonatomic, strong) id<EMChatManager> chatManager;
@@ -2593,110 +2593,110 @@ namespace Hyphenate.iOS.Lib
 
 		// -(void)registerWithUsername:(NSString *)aUsername password:(NSString *)aPassword completion:(void (^)(NSString *, EMError *))aCompletionBlock;
 		[Export ("registerWithUsername:password:completion:")]
-		void RegisterWithUsername (string aUsername, string aPassword, Action<NSString, EMError> aCompletionBlock);
+		void RegisterWithUsername (string aUsername, string aPassword, [NullAllowed] Action<NSString, EMError> aCompletionBlock);
 
 		// -(void)fetchTokenWithUsername:(NSString *)aUsername password:(NSString *)aPassword completion:(void (^)(NSString *, EMError *))aCompletionBlock;
 		[Export ("fetchTokenWithUsername:password:completion:")]
-		void FetchTokenWithUsername (string aUsername, string aPassword, Action<NSString, EMError> aCompletionBlock);
+		void FetchTokenWithUsername (string aUsername, string aPassword, [NullAllowed] Action<NSString, EMError> aCompletionBlock);
 
 		// -(EMError *)loginWithUsername:(NSString *)aUsername password:(NSString *)aPassword;
-		[Export ("loginWithUsername:password:")]
+		[NullAllowed, Export ("loginWithUsername:password:")]
 		EMError LoginWithUsernameAndPassword (string aUsername, string aPassword);
 
 		// -(void)loginWithUsername:(NSString *)aUsername password:(NSString *)aPassword completion:(void (^)(NSString *, EMError *))aCompletionBlock;
 		[Export ("loginWithUsername:password:completion:")]
-		void LoginWithUsernameAndPasswordAndCompletion (string aUsername, string aPassword, Action<NSString, EMError> aCompletionBlock);
+		void LoginWithUsernameAndPasswordAndCompletion (string aUsername, string aPassword, [NullAllowed] Action<NSString, EMError> aCompletionBlock);
 
 		// -(EMError *)loginWithUsername:(NSString *)aUsername token:(NSString *)aToken;
-		[Export ("loginWithUsername:token:")]
+		[NullAllowed, Export ("loginWithUsername:token:")]
 		EMError LoginWithUsernameWithToken (string aUsername, string aToken);
 
 		// -(void)loginWithUsername:(NSString *)aUsername token:(NSString *)aToken completion:(void (^)(NSString *, EMError *))aCompletionBlock;
 		[Export ("loginWithUsername:token:completion:")]
-		void LoginWithUsernameWithTokenAndCompletion (string aUsername, string aToken, Action<NSString, EMError> aCompletionBlock);
+		void LoginWithUsernameWithTokenAndCompletion (string aUsername, string aToken, [NullAllowed] Action<NSString, EMError> aCompletionBlock);
 
 		// -(EMError *)logout:(BOOL)aIsUnbindDeviceToken;
-		[Export ("logout:")]
+		[NullAllowed, Export ("logout:")]
 		EMError Logout (bool aIsUnbindDeviceToken);
 
 		// -(void)logout:(BOOL)aIsUnbindDeviceToken completion:(void (^)(EMError *))aCompletionBlock;
 		[Export ("logout:completion:")]
-		void LogoutWithCompletion (bool aIsUnbindDeviceToken, Action<EMError> aCompletionBlock);
+		void LogoutWithCompletion (bool aIsUnbindDeviceToken, [NullAllowed] Action<EMError> aCompletionBlock);
 
 		// -(EMError *)bindDeviceToken:(NSData *)aDeviceToken;
-		[Export ("bindDeviceToken:")]
+		[NullAllowed, Export ("bindDeviceToken:")]
 		EMError BindDeviceToken (NSData aDeviceToken);
 
 		// -(void)registerForRemoteNotificationsWithDeviceToken:(NSData *)aDeviceToken completion:(void (^)(EMError *))aCompletionBlock;
 		[Export ("registerForRemoteNotificationsWithDeviceToken:completion:")]
-		void RegisterForRemoteNotificationsWithDeviceToken (NSData aDeviceToken, Action<EMError> aCompletionBlock);
+		void RegisterForRemoteNotificationsWithDeviceToken (NSData aDeviceToken, [NullAllowed] Action<EMError> aCompletionBlock);
 
 		// -(EMError *)setApnsNickname:(NSString *)aNickname;
-		[Export ("setApnsNickname:")]
+		[NullAllowed, Export ("setApnsNickname:")]
 		EMError SetApnsNickname (string aNickname);
 
 		// -(void)updatePushNotifiationDisplayName:(NSString *)aDisplayName completion:(void (^)(NSString *, EMError *))aCompletionBlock;
 		[Export ("updatePushNotifiationDisplayName:completion:")]
-		void UpdatePushNotifiationDisplayName (string aDisplayName, Action<NSString, EMError> aCompletionBlock);
+		void UpdatePushNotifiationDisplayName (string aDisplayName, [NullAllowed] Action<NSString, EMError> aCompletionBlock);
 
 		// -(EMPushOptions *)getPushOptionsFromServerWithError:(EMError **)pError;
-		[Export ("getPushOptionsFromServerWithError:")]
+		[NullAllowed, Export ("getPushOptionsFromServerWithError:")]
 		EMPushOptions GetPushOptionsFromServerWithError (out EMError pError);
 
 		// -(void)getPushNotificationOptionsFromServerWithCompletion:(void (^)(EMPushOptions *, EMError *))aCompletionBlock;
 		[Export ("getPushNotificationOptionsFromServerWithCompletion:")]
-		void GetPushNotificationOptionsFromServerWithCompletion (Action<EMPushOptions, EMError> aCompletionBlock);
+		void GetPushNotificationOptionsFromServerWithCompletion ([NullAllowed] Action<EMPushOptions, EMError> aCompletionBlock);
 
 		// -(EMError *)updatePushOptionsToServer;
-		[Export ("updatePushOptionsToServer")]
+		[NullAllowed, Export ("updatePushOptionsToServer")]
 		//[Verify (MethodToProperty)]
 		EMError UpdatePushOptionsToServer { get; }
 
 		// -(void)updatePushNotificationOptionsToServerWithCompletion:(void (^)(EMError *))aCompletionBlock;
 		[Export ("updatePushNotificationOptionsToServerWithCompletion:")]
-		void UpdatePushNotificationOptionsToServerWithCompletion (Action<EMError> aCompletionBlock);
+		void UpdatePushNotificationOptionsToServerWithCompletion ([NullAllowed] Action<EMError> aCompletionBlock);
 
 		// -(EMError *)uploadLogToServer;
-		[Export ("uploadLogToServer")]
+		[NullAllowed, Export ("uploadLogToServer")]
 		//[Verify (MethodToProperty)]
 		EMError UploadLogToServer { get; }
 
 		// -(void)uploadDebugLogToServerWithCompletion:(void (^)(EMError *))aCompletionBlock;
 		[Export ("uploadDebugLogToServerWithCompletion:")]
-		void UploadDebugLogToServerWithCompletion (Action<EMError> aCompletionBlock);
+		void UploadDebugLogToServerWithCompletion ([NullAllowed] Action<EMError> aCompletionBlock);
 
 		// -(NSString *)getLogFilesPath:(EMError **)pError;
-		[Export ("getLogFilesPath:")]
+		[NullAllowed, Export ("getLogFilesPath:")]
 		string GetLogFilesPath (out EMError pError);
 
 		// -(void)getLogFilesPathWithCompletion:(void (^)(NSString *, EMError *))aCompletionBlock;
 		[Export ("getLogFilesPathWithCompletion:")]
-		void GetLogFilesPathWithCompletion (Action<NSString, EMError> aCompletionBlock);
+		void GetLogFilesPathWithCompletion ([NullAllowed] Action<NSString, EMError> aCompletionBlock);
 
 		// -(NSArray *)getLoggedInDevicesFromServerWithUsername:(NSString *)aUsername password:(NSString *)aPassword error:(EMError **)pError;
-		[Export ("getLoggedInDevicesFromServerWithUsername:password:error:")]
+		[NullAllowed, Export ("getLoggedInDevicesFromServerWithUsername:password:error:")]
 		//[Verify (StronglyTypedNSArray)]
 		NSObject[] GetLoggedInDevicesFromServerWithUsername (string aUsername, string aPassword, out EMError pError);
 
 		// -(void)getLoggedInDevicesFromServerWithUsername:(NSString *)aUsername password:(NSString *)aPassword completion:(void (^)(NSArray *, EMError *))aCompletionBlock;
 		[Export ("getLoggedInDevicesFromServerWithUsername:password:completion:")]
-		void GetLoggedInDevicesFromServerWithUsername (string aUsername, string aPassword, Action<NSArray, EMError> aCompletionBlock);
+		void GetLoggedInDevicesFromServerWithUsername (string aUsername, string aPassword, [NullAllowed] Action<NSArray, EMError> aCompletionBlock);
 
 		// -(EMError *)kickDevice:(EMDeviceConfig *)aDevice username:(NSString *)aUsername password:(NSString *)aPassword;
-		[Export ("kickDevice:username:password:")]
+		[NullAllowed, Export ("kickDevice:username:password:")]
 		EMError KickDevice (EMDeviceConfig aDevice, string aUsername, string aPassword);
 
 		// -(void)kickDevice:(EMDeviceConfig *)aDevice username:(NSString *)aUsername password:(NSString *)aPassword completion:(void (^)(EMError *))aCompletionBlock;
 		[Export ("kickDevice:username:password:completion:")]
-		void KickDevice (EMDeviceConfig aDevice, string aUsername, string aPassword, Action<EMError> aCompletionBlock);
+		void KickDevice (EMDeviceConfig aDevice, string aUsername, string aPassword, [NullAllowed] Action<EMError> aCompletionBlock);
 
 		// -(EMError *)kickAllDevicesWithUsername:(NSString *)aUsername password:(NSString *)aPassword;
-		[Export ("kickAllDevicesWithUsername:password:")]
+		[NullAllowed, Export ("kickAllDevicesWithUsername:password:")]
 		EMError KickAllDevicesWithUsername (string aUsername, string aPassword);
 
 		// -(void)kickAllDevicesWithUsername:(NSString *)aUsername password:(NSString *)aPassword completion:(void (^)(EMError *))aCompletionBlock;
 		[Export ("kickAllDevicesWithUsername:password:completion:")]
-		void KickAllDevicesWithUsername (string aUsername, string aPassword, Action<EMError> aCompletionBlock);
+		void KickAllDevicesWithUsername (string aUsername, string aPassword, [NullAllowed] Action<EMError> aCompletionBlock);
 
 		// -(BOOL)migrateDatabaseToLatestSDK;
 		[Export ("migrateDatabaseToLatestSDK")]
@@ -2717,7 +2717,7 @@ namespace Hyphenate.iOS.Lib
 
 		// -(void)serviceCheckWithUsername:(NSString *)aUsername password:(NSString *)aPassword completion:(void (^)(EMServerCheckType, EMError *))aCompletionBlock;
 		[Export ("serviceCheckWithUsername:password:completion:")]
-		void ServiceCheckWithUsername (string aUsername, string aPassword, Action<EMServerCheckType, EMError> aCompletionBlock);
+		void ServiceCheckWithUsername (string aUsername, string aPassword, [NullAllowed] Action<EMServerCheckType, EMError> aCompletionBlock);
 
 		// -(void)addDelegate:(id<EMClientDelegate>)aDelegate __attribute__((deprecated("")));
 		[Export ("addDelegate:")]
@@ -2725,35 +2725,35 @@ namespace Hyphenate.iOS.Lib
 
 		// -(void)asyncRegisterWithUsername:(NSString *)aUsername password:(NSString *)aPassword success:(void (^)())aSuccessBlock failure:(void (^)(EMError *))aFailureBlock __attribute__((deprecated("Use -registerWithUsername:password:completion:")));
 		[Export ("asyncRegisterWithUsername:password:success:failure:")]
-		void AsyncRegisterWithUsername (string aUsername, string aPassword, Action aSuccessBlock, Action<EMError> aFailureBlock);
+		void AsyncRegisterWithUsername (string aUsername, string aPassword, [NullAllowed] Action aSuccessBlock, [NullAllowed] Action<EMError> aFailureBlock);
 
 		// -(void)asyncLoginWithUsername:(NSString *)aUsername password:(NSString *)aPassword success:(void (^)())aSuccessBlock failure:(void (^)(EMError *))aFailureBlock __attribute__((deprecated("Use -loginWithUsername:password:completion")));
 		[Export ("asyncLoginWithUsername:password:success:failure:")]
-		void AsyncLoginWithUsername (string aUsername, string aPassword, Action aSuccessBlock, Action<EMError> aFailureBlock);
+		void AsyncLoginWithUsername (string aUsername, string aPassword, [NullAllowed] Action aSuccessBlock, [NullAllowed] Action<EMError> aFailureBlock);
 
 		// -(void)asyncLogout:(BOOL)aIsUnbindDeviceToken success:(void (^)())aSuccessBlock failure:(void (^)(EMError *))aFailureBlock __attribute__((deprecated("Use -logout:completion:")));
 		[Export ("asyncLogout:success:failure:")]
-		void AsyncLogout (bool aIsUnbindDeviceToken, Action aSuccessBlock, Action<EMError> aFailureBlock);
+		void AsyncLogout (bool aIsUnbindDeviceToken, [NullAllowed] Action aSuccessBlock, [NullAllowed] Action<EMError> aFailureBlock);
 
 		// -(void)asyncBindDeviceToken:(NSData *)aDeviceToken success:(void (^)())aSuccessBlock failure:(void (^)(EMError *))aFailureBlock __attribute__((deprecated("Use -registerForRemoteNotificationsWithDeviceToken:completion:")));
 		[Export ("asyncBindDeviceToken:success:failure:")]
-		void AsyncBindDeviceToken (NSData aDeviceToken, Action aSuccessBlock, Action<EMError> aFailureBlock);
+		void AsyncBindDeviceToken (NSData aDeviceToken, [NullAllowed] Action aSuccessBlock, [NullAllowed] Action<EMError> aFailureBlock);
 
 		// -(void)asyncSetApnsNickname:(NSString *)aNickname success:(void (^)())aSuccessBlock failure:(void (^)(EMError *))aFailureBlock __attribute__((deprecated("Use -updatePushNotifiationDisplayName:copletion")));
 		[Export ("asyncSetApnsNickname:success:failure:")]
-		void AsyncSetApnsNickname (string aNickname, Action aSuccessBlock, Action<EMError> aFailureBlock);
+		void AsyncSetApnsNickname (string aNickname, [NullAllowed] Action aSuccessBlock, [NullAllowed] Action<EMError> aFailureBlock);
 
 		// -(void)asyncGetPushOptionsFromServer:(void (^)(EMPushOptions *))aSuccessBlock failure:(void (^)(EMError *))aFailureBlock __attribute__((deprecated("Use -getPushOptionsFromServerWithCompletion:")));
 		[Export ("asyncGetPushOptionsFromServer:failure:")]
-		void AsyncGetPushOptionsFromServer (Action<EMPushOptions> aSuccessBlock, Action<EMError> aFailureBlock);
+		void AsyncGetPushOptionsFromServer ([NullAllowed] Action<EMPushOptions> aSuccessBlock, [NullAllowed] Action<EMError> aFailureBlock);
 
 		// -(void)asyncUpdatePushOptionsToServer:(void (^)())aSuccessBlock failure:(void (^)(EMError *))aFailureBlock __attribute__((deprecated("Use -updatePushNotificationOptionsToServerWithCompletion:")));
 		[Export ("asyncUpdatePushOptionsToServer:failure:")]
-		void AsyncUpdatePushOptionsToServer (Action aSuccessBlock, Action<EMError> aFailureBlock);
+		void AsyncUpdatePushOptionsToServer ([NullAllowed] Action aSuccessBlock, [NullAllowed] Action<EMError> aFailureBlock);
 
 		// -(void)asyncUploadLogToServer:(void (^)())aSuccessBlock failure:(void (^)(EMError *))aFailureBlock __attribute__((deprecated("Use -uploadDebugLogToServerWithCompletion:")));
 		[Export ("asyncUploadLogToServer:failure:")]
-		void AsyncUploadLogToServer (Action aSuccessBlock, Action<EMError> aFailureBlock);
+		void AsyncUploadLogToServer ([NullAllowed] Action aSuccessBlock, [NullAllowed] Action<EMError> aFailureBlock);
 
 		// -(BOOL)dataMigrationTo3 __attribute__((deprecated("Use -migrateDatabaseToLatestSDK")));
 		[Export ("dataMigrationTo3")]
@@ -2774,11 +2774,11 @@ namespace Hyphenate.iOS.Lib
 		bool IsSendPushIfOffline { get; set; }
 
 		// @property (nonatomic, strong) NSString * offlineMessageText;
-		[Export ("offlineMessageText", ArgumentSemantic.Strong)]
+		[NullAllowed, Export ("offlineMessageText", ArgumentSemantic.Strong)]
 		string OfflineMessageText { get; set; }
 
 		// @property (assign, nonatomic) EMCallVideoResolution videoResolution;
-		[Export ("videoResolution", ArgumentSemantic.Assign)]
+		[NullAllowed, Export ("videoResolution", ArgumentSemantic.Assign)]
 		EMCallVideoResolution VideoResolution { get; set; }
 
 		// @property (assign, nonatomic) long maxVideoKbps;
@@ -2865,11 +2865,11 @@ namespace Hyphenate.iOS.Lib
 	interface EMCallSession
 	{
 		// @property (readonly, nonatomic, strong) NSString * callId;
-		[Export ("callId", ArgumentSemantic.Strong)]
+		[NullAllowed, Export ("callId", ArgumentSemantic.Strong)]
 		string CallId { get; }
 
 		// @property (readonly, nonatomic, strong) NSString * localName;
-		[Export ("localName", ArgumentSemantic.Strong)]
+		[NullAllowed, Export ("localName", ArgumentSemantic.Strong)]
 		string LocalName { get; }
 
 		// @property (readonly, nonatomic) EMCallType type;
@@ -2881,7 +2881,7 @@ namespace Hyphenate.iOS.Lib
 		bool IsCaller { get; }
 
 		// @property (readonly, nonatomic, strong) NSString * remoteName;
-		[Export ("remoteName", ArgumentSemantic.Strong)]
+		[NullAllowed, Export ("remoteName", ArgumentSemantic.Strong)]
 		string RemoteName { get; }
 
 		// @property (readonly, nonatomic) EMCallSessionStatus status;
@@ -2889,11 +2889,11 @@ namespace Hyphenate.iOS.Lib
 		EMCallSessionStatus Status { get; }
 
 		// @property (nonatomic, strong) EMCallLocalView * localVideoView;
-		[Export ("localVideoView", ArgumentSemantic.Strong)]
+		[NullAllowed, Export ("localVideoView", ArgumentSemantic.Strong)]
 		EMCallLocalView LocalVideoView { get; set; }
 
 		// @property (nonatomic, strong) EMCallRemoteView * remoteVideoView;
-		[Export ("remoteVideoView", ArgumentSemantic.Strong)]
+		[NullAllowed, Export ("remoteVideoView", ArgumentSemantic.Strong)]
 		EMCallRemoteView RemoteVideoView { get; set; }
 
 		// @property (readonly, nonatomic) EMCallConnectType connectType;
@@ -2933,26 +2933,26 @@ namespace Hyphenate.iOS.Lib
 		CGSize RemoteVideoResolution { get; }
 
 		// @property (readonly, nonatomic) NSString * ext;
-		[Export ("ext")]
+		[NullAllowed, Export ("ext")]
 		string Ext { get; }
 
 		// -(EMError *)pauseVoice;
-		[Export ("pauseVoice")]
+		[NullAllowed, Export ("pauseVoice")]
 		//[Verify (MethodToProperty)]
 		EMError PauseVoice { get; }
 
 		// -(EMError *)resumeVoice;
-		[Export ("resumeVoice")]
+		[NullAllowed, Export ("resumeVoice")]
 		//[Verify (MethodToProperty)]
 		EMError ResumeVoice { get; }
 
 		// -(EMError *)pauseVideo;
-		[Export ("pauseVideo")]
+		[NullAllowed, Export ("pauseVideo")]
 		//[Verify (MethodToProperty)]
 		EMError PauseVideo { get; }
 
 		// -(EMError *)resumeVideo;
-		[Export ("resumeVideo")]
+		[NullAllowed, Export ("resumeVideo")]
 		//[Verify (MethodToProperty)]
 		EMError ResumeVideo { get; }
 
@@ -3033,20 +3033,20 @@ namespace Hyphenate.iOS.Lib
 		void SetCallOptions (EMCallOptions aOptions);
 
 		// @optional -(EMCallOptions *)getCallOptions;
-		[Export ("getCallOptions")]
+		[NullAllowed, Export ("getCallOptions")]
 		//[Verify (MethodToProperty)]
 		EMCallOptions CallOptions { get; }
 
 		// @optional -(void)startCall:(EMCallType)aType remoteName:(NSString *)aRemoteName ext:(NSString *)aExt completion:(void (^)(EMCallSession *, EMError *))aCompletionBlock;
 		[Export ("startCall:remoteName:ext:completion:")]
-		void StartCall (EMCallType aType, string aRemoteName, string aExt, Action<EMCallSession, EMError> aCompletionBlock);
+		void StartCall (EMCallType aType, string aRemoteName, string aExt, [NullAllowed] Action<EMCallSession, EMError> aCompletionBlock);
 
 		// @optional -(EMError *)answerIncomingCall:(NSString *)aCallId;
-		[Export ("answerIncomingCall:")]
+		[NullAllowed, Export ("answerIncomingCall:")]
 		EMError AnswerIncomingCall (string aCallId);
 
 		// @optional -(EMError *)endCall:(NSString *)aCallId reason:(EMCallEndReason)aReason;
-		[Export ("endCall:reason:")]
+		[NullAllowed, Export ("endCall:reason:")]
 		EMError EndCall (string aCallId, EMCallEndReason aReason);
 
 		// @optional -(void)forceEndAllCall;
@@ -3055,23 +3055,23 @@ namespace Hyphenate.iOS.Lib
 
 		// @optional -(void)inputVideoSampleBuffer:(CMSampleBufferRef)aSampleBuffer callId:(NSString *)aCallId format:(EMCallVideoFormat)aFormat rotation:(int)aRotation completion:(void (^)(EMError *))aCompletionBlock;
 		[Export ("inputVideoSampleBuffer:callId:format:rotation:completion:")]
-		unsafe void InputVideoSampleBuffer (CMSampleBuffer aSampleBuffer, string aCallId, EMCallVideoFormat aFormat, int aRotation, Action<EMError> aCompletionBlock);
+		unsafe void InputVideoSampleBuffer (CMSampleBuffer aSampleBuffer, string aCallId, EMCallVideoFormat aFormat, int aRotation, [NullAllowed] Action<EMError> aCompletionBlock);
 
 		// @optional -(void)inputVideoPixelBuffer:(CVPixelBufferRef)aPixelBuffer callId:(NSString *)aCallId format:(EMCallVideoFormat)aFormat rotation:(int)aRotation completion:(void (^)(EMError *))aCompletionBlock;
 		[Export ("inputVideoPixelBuffer:callId:format:rotation:completion:")]
-		unsafe void InputVideoPixelBuffer (CVPixelBuffer aPixelBuffer, string aCallId, EMCallVideoFormat aFormat, int aRotation, Action<EMError> aCompletionBlock);
+		unsafe void InputVideoPixelBuffer (CVPixelBuffer aPixelBuffer, string aCallId, EMCallVideoFormat aFormat, int aRotation, [NullAllowed] Action<EMError> aCompletionBlock);
 
 		// @optional -(void)inputVideoData:(NSData *)aData callId:(NSString *)aCallId widthInPixels:(size_t)aWidth heightInPixels:(size_t)aHeight format:(EMCallVideoFormat)aFormat rotation:(int)aRotation completion:(void (^)(EMError *))aCompletionBlock;
 		[Export ("inputVideoData:callId:widthInPixels:heightInPixels:format:rotation:completion:")]
-		void InputVideoData (NSData aData, string aCallId, nuint aWidth, nuint aHeight, EMCallVideoFormat aFormat, int aRotation, Action<EMError> aCompletionBlock);
+		void InputVideoData (NSData aData, string aCallId, nuint aWidth, nuint aHeight, EMCallVideoFormat aFormat, int aRotation, [NullAllowed] Action<EMError> aCompletionBlock);
 
 		// @optional -(void)startVoiceCall:(NSString *)aUsername completion:(void (^)(EMCallSession *, EMError *))aCompletionBlock __attribute__((deprecated("")));
 		[Export ("startVoiceCall:completion:")]
-		void StartVoiceCall (string aUsername, Action<EMCallSession, EMError> aCompletionBlock);
+		void StartVoiceCall (string aUsername, [NullAllowed] Action<EMCallSession, EMError> aCompletionBlock);
 
 		// @optional -(void)startVideoCall:(NSString *)aUsername completion:(void (^)(EMCallSession *, EMError *))aCompletionBlock __attribute__((deprecated("")));
 		[Export ("startVideoCall:completion:")]
-		void StartVideoCall (string aUsername, Action<EMCallSession, EMError> aCompletionBlock);
+		void StartVideoCall (string aUsername, [NullAllowed] Action<EMCallSession, EMError> aCompletionBlock);
 	}
 
 	// @interface Call (EMClient)
@@ -3089,15 +3089,15 @@ namespace Hyphenate.iOS.Lib
 	interface EMCallMember
 	{
 		// @property (readonly, nonatomic, strong) NSString * memberId;
-		[Export ("memberId", ArgumentSemantic.Strong)]
+		[NullAllowed, Export ("memberId", ArgumentSemantic.Strong)]
 		string MemberId { get; }
 
 		// @property (readonly, nonatomic, strong) NSString * memberName;
-		[Export ("memberName", ArgumentSemantic.Strong)]
+		[NullAllowed, Export ("memberName", ArgumentSemantic.Strong)]
 		string MemberName { get; }
 
 		// @property (readonly, nonatomic, strong) NSString * ext;
-		[Export ("ext", ArgumentSemantic.Strong)]
+		[NullAllowed, Export ("ext", ArgumentSemantic.Strong)]
 		string Ext { get; }
 	}
 
@@ -3106,15 +3106,15 @@ namespace Hyphenate.iOS.Lib
 	interface EMCallConference
 	{
 		// @property (readonly, nonatomic, strong) NSString * callId;
-		[Export ("callId", ArgumentSemantic.Strong)]
+		[NullAllowed, Export ("callId", ArgumentSemantic.Strong)]
 		string CallId { get; }
 
 		// @property (readonly, nonatomic, strong) NSString * confId;
-		[Export ("confId", ArgumentSemantic.Strong)]
+		[NullAllowed, Export ("confId", ArgumentSemantic.Strong)]
 		string ConfId { get; }
 
 		// @property (readonly, nonatomic, strong) NSString * localName;
-		[Export ("localName", ArgumentSemantic.Strong)]
+		[NullAllowed, Export ("localName", ArgumentSemantic.Strong)]
 		string LocalName { get; }
 
 		// @property (nonatomic) EMConferenceType type;
@@ -3126,11 +3126,11 @@ namespace Hyphenate.iOS.Lib
 		EMConferenceRole Role { get; set; }
 
 		// @property (nonatomic, strong) NSArray<NSString *> * adminIds;
-		[Export ("adminIds", ArgumentSemantic.Strong)]
+		[NullAllowed, Export ("adminIds", ArgumentSemantic.Strong)]
 		string[] AdminIds { get; set; }
 
 		// @property (nonatomic, strong) NSArray<NSString *> * speakerIds;
-		[Export ("speakerIds", ArgumentSemantic.Strong)]
+		[NullAllowed, Export ("speakerIds", ArgumentSemantic.Strong)]
 		string[] SpeakerIds { get; set; }
 
 		// @property (nonatomic) NSInteger memberCount;
@@ -3143,19 +3143,19 @@ namespace Hyphenate.iOS.Lib
 	interface EMCallStream
 	{
 		// @property (readonly, nonatomic, strong) NSString * streamId;
-		[Export ("streamId", ArgumentSemantic.Strong)]
+		[NullAllowed, Export ("streamId", ArgumentSemantic.Strong)]
 		string StreamId { get; }
 
 		// @property (readonly, nonatomic, strong) NSString * streamName;
-		[Export ("streamName", ArgumentSemantic.Strong)]
+		[NullAllowed, Export ("streamName", ArgumentSemantic.Strong)]
 		string StreamName { get; }
 
 		// @property (readonly, nonatomic, strong) NSString * memberName;
-		[Export ("memberName", ArgumentSemantic.Strong)]
+		[NullAllowed, Export ("memberName", ArgumentSemantic.Strong)]
 		string MemberName { get; }
 
 		// @property (readonly, nonatomic, strong) NSString * userName;
-		[Export ("userName", ArgumentSemantic.Strong)]
+		[NullAllowed, Export ("userName", ArgumentSemantic.Strong)]
 		string UserName { get; }
 
 		// @property (readonly, nonatomic) BOOL enableVoice;
@@ -3167,7 +3167,7 @@ namespace Hyphenate.iOS.Lib
 		bool EnableVideo { get; }
 
 		// @property (readonly, nonatomic, strong) NSString * ext;
-		[Export ("ext", ArgumentSemantic.Strong)]
+		[NullAllowed, Export ("ext", ArgumentSemantic.Strong)]
 		string Ext { get; }
 
 		// @property (nonatomic) EMStreamType type;
@@ -3180,7 +3180,7 @@ namespace Hyphenate.iOS.Lib
 	interface EMStreamParam
 	{
 		// @property (copy, nonatomic) NSString * streamName;
-		[Export ("streamName")]
+		[NullAllowed, Export ("streamName")]
 		string StreamName { get; set; }
 
 		// @property (nonatomic) EMStreamType type;
@@ -3196,7 +3196,7 @@ namespace Hyphenate.iOS.Lib
 		bool IsMute { get; set; }
 
 		// @property (copy, nonatomic) NSString * ext;
-		[Export ("ext")]
+		[NullAllowed, Export ("ext")]
 		string Ext { get; set; }
 
 		// @property (nonatomic) BOOL enableCustomizeVideoData;
@@ -3228,11 +3228,11 @@ namespace Hyphenate.iOS.Lib
 		EMCallVideoResolution VideoResolution { get; set; }
 
 		// @property (nonatomic, strong) EMCallLocalView * localView;
-		[Export ("localView", ArgumentSemantic.Strong)]
+		[NullAllowed, Export ("localView", ArgumentSemantic.Strong)]
 		EMCallLocalView LocalView { get; set; }
 
 		// @property (nonatomic, strong) UIView * desktopView;
-		[Export ("desktopView", ArgumentSemantic.Strong)]
+		[NullAllowed, Export ("desktopView", ArgumentSemantic.Strong)]
 		UIView DesktopView { get; set; }
 
 		// -(instancetype)initWithStreamName:(NSString *)aStreamName;
@@ -3321,60 +3321,60 @@ namespace Hyphenate.iOS.Lib
 		void SetAppkey (string aAppkey, string aUsername, string aToken);
 
 		// @optional -(NSString *)getMemberNameWithAppkey:(NSString *)aAppkey username:(NSString *)aUserName;
-		[Export ("getMemberNameWithAppkey:username:")]
+		[NullAllowed, Export ("getMemberNameWithAppkey:username:")]
 		string GetMemberNameWithAppkey (string aAppkey, string aUserName);
 
 		// @optional -(void)getConference:(NSString *)aConfId password:(NSString *)aPassword completion:(void (^)(EMCallConference *, EMError *))aCompletionBlock;
 		[Export ("getConference:password:completion:")]
-		void GetConference (string aConfId, string aPassword, Action<EMCallConference, EMError> aCompletionBlock);
+		void GetConference (string aConfId, string aPassword, [NullAllowed] Action<EMCallConference, EMError> aCompletionBlock);
 
 		// @optional -(void)createAndJoinConferenceWithType:(EMConferenceType)aType password:(NSString *)aPassword completion:(void (^)(EMCallConference *, NSString *, EMError *))aCompletionBlock;
 		[Export ("createAndJoinConferenceWithType:password:completion:")]
-		void CreateAndJoinConferenceWithType (EMConferenceType aType, string aPassword, Action<EMCallConference, NSString, EMError> aCompletionBlock);
+		void CreateAndJoinConferenceWithType (EMConferenceType aType, string aPassword, [NullAllowed] Action<EMCallConference, NSString, EMError> aCompletionBlock);
 
 		// @optional -(void)joinConferenceWithConfId:(NSString *)aConfId password:(NSString *)aPassword completion:(void (^)(EMCallConference *, EMError *))aCompletionBlock;
 		[Export ("joinConferenceWithConfId:password:completion:")]
-		void JoinConferenceWithConfId (string aConfId, string aPassword, Action<EMCallConference, EMError> aCompletionBlock);
+		void JoinConferenceWithConfId (string aConfId, string aPassword, [NullAllowed] Action<EMCallConference, EMError> aCompletionBlock);
 
 		// @optional -(void)joinConferenceWithTicket:(NSString *)aTicket completion:(void (^)(EMCallConference *, EMError *))aCompletionBlock;
 		[Export ("joinConferenceWithTicket:completion:")]
-		void JoinConferenceWithTicket (string aTicket, Action<EMCallConference, EMError> aCompletionBlock);
+		void JoinConferenceWithTicket (string aTicket, [NullAllowed] Action<EMCallConference, EMError> aCompletionBlock);
 
 		// @optional -(void)publishConference:(EMCallConference *)aCall streamParam:(EMStreamParam *)aStreamParam completion:(void (^)(NSString *, EMError *))aCompletionBlock;
 		[Export ("publishConference:streamParam:completion:")]
-		void PublishConference (EMCallConference aCall, EMStreamParam aStreamParam, Action<NSString, EMError> aCompletionBlock);
+		void PublishConference (EMCallConference aCall, EMStreamParam aStreamParam, [NullAllowed] Action<NSString, EMError> aCompletionBlock);
 
 		// @optional -(void)unpublishConference:(EMCallConference *)aCall streamId:(NSString *)aStreamId completion:(void (^)(EMError *))aCompletionBlock;
 		[Export ("unpublishConference:streamId:completion:")]
-		void UnpublishConference (EMCallConference aCall, string aStreamId, Action<EMError> aCompletionBlock);
+		void UnpublishConference (EMCallConference aCall, string aStreamId, [NullAllowed] Action<EMError> aCompletionBlock);
 
 		// @optional -(void)subscribeConference:(EMCallConference *)aCall streamId:(NSString *)aStreamId remoteVideoView:(EMCallRemoteView *)aRemoteView completion:(void (^)(EMError *))aCompletionBlock;
 		[Export ("subscribeConference:streamId:remoteVideoView:completion:")]
-		void SubscribeConference (EMCallConference aCall, string aStreamId, EMCallRemoteView aRemoteView, Action<EMError> aCompletionBlock);
+		void SubscribeConference (EMCallConference aCall, string aStreamId, EMCallRemoteView aRemoteView, [NullAllowed] Action<EMError> aCompletionBlock);
 
 		// @optional -(void)unsubscribeConference:(EMCallConference *)aCall streamId:(NSString *)aStreamId completion:(void (^)(EMError *))aCompletionBlock;
 		[Export ("unsubscribeConference:streamId:completion:")]
-		void UnsubscribeConference (EMCallConference aCall, string aStreamId, Action<EMError> aCompletionBlock);
+		void UnsubscribeConference (EMCallConference aCall, string aStreamId, [NullAllowed] Action<EMError> aCompletionBlock);
 
 		// @optional -(void)changeMemberRoleWithConfId:(NSString *)aConfId memberNames:(NSArray<NSString *> *)aMemberNameList role:(EMConferenceRole)aRole completion:(void (^)(EMError *))aCompletionBlock;
 		[Export ("changeMemberRoleWithConfId:memberNames:role:completion:")]
-		void ChangeMemberRoleWithConfId (string aConfId, string[] aMemberNameList, EMConferenceRole aRole, Action<EMError> aCompletionBlock);
+		void ChangeMemberRoleWithConfId (string aConfId, string[] aMemberNameList, EMConferenceRole aRole, [NullAllowed] Action<EMError> aCompletionBlock);
 
 		// @optional -(void)kickMemberWithConfId:(NSString *)aConfId memberNames:(NSArray<NSString *> *)aMemberNameList completion:(void (^)(EMError *))aCompletionBlock;
 		[Export ("kickMemberWithConfId:memberNames:completion:")]
-		void KickMemberWithConfId (string aConfId, string[] aMemberNameList, Action<EMError> aCompletionBlock);
+		void KickMemberWithConfId (string aConfId, string[] aMemberNameList, [NullAllowed] Action<EMError> aCompletionBlock);
 
 		// @optional -(void)destroyConferenceWithId:(NSString *)aConfId completion:(void (^)(EMError *))aCompletionBlock;
 		[Export ("destroyConferenceWithId:completion:")]
-		void DestroyConferenceWithId (string aConfId, Action<EMError> aCompletionBlock);
+		void DestroyConferenceWithId (string aConfId, [NullAllowed] Action<EMError> aCompletionBlock);
 
 		// @optional -(void)leaveConference:(EMCallConference *)aCall completion:(void (^)(EMError *))aCompletionBlock;
 		[Export ("leaveConference:completion:")]
-		void LeaveConference (EMCallConference aCall, Action<EMError> aCompletionBlock);
+		void LeaveConference (EMCallConference aCall, [NullAllowed] Action<EMError> aCompletionBlock);
 
 		// @optional -(void)startMonitorSpeaker:(EMCallConference *)aCall timeInterval:(long long)aTimeMillisecond completion:(void (^)(EMError *))aCompletionBlock;
 		[Export ("startMonitorSpeaker:timeInterval:completion:")]
-		void StartMonitorSpeaker (EMCallConference aCall, long aTimeMillisecond, Action<EMError> aCompletionBlock);
+		void StartMonitorSpeaker (EMCallConference aCall, long aTimeMillisecond, [NullAllowed] Action<EMError> aCompletionBlock);
 
 		// @optional -(void)stopMonitorSpeaker:(EMCallConference *)aCall;
 		[Export ("stopMonitorSpeaker:")]
@@ -3394,7 +3394,7 @@ namespace Hyphenate.iOS.Lib
 
 		// @optional -(void)updateConference:(EMCallConference *)aCall streamId:(NSString *)aStreamId remoteVideoView:(EMCallRemoteView *)aRemoteView completion:(void (^)(EMError *))aCompletionBlock;
 		[Export ("updateConference:streamId:remoteVideoView:completion:")]
-		void UpdateConferenceWithRemoteVideoViewAndCompletion (EMCallConference aCall, string aStreamId, EMCallRemoteView aRemoteView, Action<EMError> aCompletionBlock);
+		void UpdateConferenceWithRemoteVideoViewAndCompletion (EMCallConference aCall, string aStreamId, EMCallRemoteView aRemoteView, [NullAllowed] Action<EMError> aCompletionBlock);
 
 		// @optional -(void)updateConference:(EMCallConference *)aCall maxVideoKbps:(int)aMaxVideoKbps;
 		[Export ("updateConference:maxVideoKbps:")]
@@ -3402,15 +3402,15 @@ namespace Hyphenate.iOS.Lib
 
 		// @optional -(void)inputVideoSampleBuffer:(CMSampleBufferRef)aSampleBuffer conference:(EMCallConference *)aCall publishedStreamId:(NSString *)aPubStreamId format:(EMCallVideoFormat)aFormat rotation:(int)aRotation completion:(void (^)(EMError *))aCompletionBlock;
 		[Export ("inputVideoSampleBuffer:conference:publishedStreamId:format:rotation:completion:")]
-		unsafe void InputVideoSampleBuffer (CMSampleBuffer aSampleBuffer, EMCallConference aCall, string aPubStreamId, EMCallVideoFormat aFormat, int aRotation, Action<EMError> aCompletionBlock);
+		unsafe void InputVideoSampleBuffer (CMSampleBuffer aSampleBuffer, EMCallConference aCall, string aPubStreamId, EMCallVideoFormat aFormat, int aRotation, [NullAllowed] Action<EMError> aCompletionBlock);
 
 		// @optional -(void)inputVideoPixelBuffer:(CVPixelBufferRef)aPixelBuffer conference:(EMCallConference *)aCall publishedStreamId:(NSString *)aPubStreamId format:(EMCallVideoFormat)aFormat rotation:(int)aRotation completion:(void (^)(EMError *))aCompletionBlock;
 		[Export ("inputVideoPixelBuffer:conference:publishedStreamId:format:rotation:completion:")]
-		unsafe void InputVideoPixelBuffer (CVPixelBuffer aPixelBuffer, EMCallConference aCall, string aPubStreamId, EMCallVideoFormat aFormat, int aRotation, Action<EMError> aCompletionBlock);
+		unsafe void InputVideoPixelBuffer (CVPixelBuffer aPixelBuffer, EMCallConference aCall, string aPubStreamId, EMCallVideoFormat aFormat, int aRotation, [NullAllowed] Action<EMError> aCompletionBlock);
 
 		// @optional -(void)inputVideoData:(NSData *)aData conference:(EMCallConference *)aCall publishedStreamId:(NSString *)aPubStreamId widthInPixels:(size_t)aWidth heightInPixels:(size_t)aHeight format:(EMCallVideoFormat)aFormat rotation:(int)aRotation completion:(void (^)(EMError *))aCompletionBlock;
 		[Export ("inputVideoData:conference:publishedStreamId:widthInPixels:heightInPixels:format:rotation:completion:")]
-		void InputVideoData (NSData aData, EMCallConference aCall, string aPubStreamId, nuint aWidth, nuint aHeight, EMCallVideoFormat aFormat, int aRotation, Action<EMError> aCompletionBlock);
+		void InputVideoData (NSData aData, EMCallConference aCall, string aPubStreamId, nuint aWidth, nuint aHeight, EMCallVideoFormat aFormat, int aRotation, [NullAllowed] Action<EMError> aCompletionBlock);
 
 		// @optional @property (nonatomic) EMConferenceMode mode __attribute__((deprecated("")));
 		[Export ("mode", ArgumentSemantic.Assign)]
@@ -3418,7 +3418,7 @@ namespace Hyphenate.iOS.Lib
 
 		// @optional -(void)createAndJoinConferenceWithPassword:(NSString *)aPassword completion:(void (^)(EMCallConference *, NSString *, EMError *))aCompletionBlock __attribute__((deprecated("")));
 		[Export ("createAndJoinConferenceWithPassword:completion:")]
-		void CreateAndJoinConferenceWithPassword (string aPassword, Action<EMCallConference, NSString, EMError> aCompletionBlock);
+		void CreateAndJoinConferenceWithPassword (string aPassword, [NullAllowed] Action<EMCallConference, NSString, EMError> aCompletionBlock);
 
 		// @optional -(void)inviteUserToJoinConference:(EMCallConference *)aCall userName:(NSString *)aUserName password:(NSString *)aPassword ext:(NSString *)aExt error:(EMError **)pError __attribute__((deprecated("")));
 		[Export ("inviteUserToJoinConference:userName:password:ext:error:")]
