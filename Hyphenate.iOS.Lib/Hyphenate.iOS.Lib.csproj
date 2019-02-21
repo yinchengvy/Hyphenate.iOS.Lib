@@ -12,7 +12,7 @@
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
     <PackOnBuild>true</PackOnBuild>
     <PackageId>Hyphenate.iOS.Lib</PackageId>
-    <PackageVersion>3.5.2.2</PackageVersion>
+    <PackageVersion>3.5.2.3</PackageVersion>
     <Authors>YinCheng</Authors>
     <PackageLicenseUrl>https://opensource.org/licenses/MIT</PackageLicenseUrl>
     <Owners>YinCheng</Owners>
@@ -20,7 +20,12 @@
     <PackageReleaseNotes>Hyphenate iOS Library v3.5.2</PackageReleaseNotes>
     <PackageTags>Xamarin.iOS, Hyphenate</PackageTags>
     <Title>Hyphenate.iOS.Lib</Title>
-    <Description>Xamarin Binding for Hyphenate iOS Library</Description>
+    <Description>Xamarin Binding for Hyphenate iOS Library 3.5.2(3)
+
+- 添加NullAllowed修饰
+- 给继承于EMFileMessageBody的子类添加构造方法
+- 添加静态类DefineConstants，包含#define定义
+- 添加EMOptions+PrivateDeploy 扩展</Description>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
