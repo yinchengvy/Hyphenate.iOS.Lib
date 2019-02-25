@@ -12,15 +12,15 @@
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
     <PackOnBuild>true</PackOnBuild>
     <PackageId>Hyphenate.iOS.Lib</PackageId>
-    <PackageVersion>3.5.2.3</PackageVersion>
+    <PackageVersion>3.5.3.0</PackageVersion>
     <Authors>YinCheng</Authors>
     <PackageLicenseUrl>https://opensource.org/licenses/MIT</PackageLicenseUrl>
     <Owners>YinCheng</Owners>
     <PackageProjectUrl>https://github.com/yinchengvy/Hyphenate.iOS.Lib.git</PackageProjectUrl>
-    <PackageReleaseNotes>Hyphenate iOS Library v3.5.2</PackageReleaseNotes>
+    <PackageReleaseNotes>Hyphenate iOS Library v3.5.3</PackageReleaseNotes>
     <PackageTags>Xamarin.iOS, Hyphenate</PackageTags>
     <Title>Hyphenate.iOS.Lib</Title>
-    <Description>Xamarin Binding for Hyphenate iOS Library 3.5.2(3)
+    <Description>Xamarin Binding for Hyphenate iOS Library 3.5.3(0)
 
 - 添加NullAllowed修饰
 - 给继承于EMFileMessageBody的子类添加构造方法
